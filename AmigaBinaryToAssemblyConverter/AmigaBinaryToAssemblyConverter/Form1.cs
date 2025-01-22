@@ -78,6 +78,14 @@ namespace BinToAssembly
         }
 
         /// <summary>
+        /// Convert To Hex Eight
+        /// </summary>
+        private string ConvertToHexEight(string value)
+        {
+            return int.Parse(value, System.Globalization.NumberStyles.HexNumber).ToString("X8"); ;
+         }
+
+        /// <summary>
         /// Add Labels
         /// </summary>
         private void AddLabels(
@@ -122,9 +130,10 @@ namespace BinToAssembly
                             location = location.Replace("$", "").ToUpper();
                             // TODO => Convert the location Value to X8 String
                             //location = int.Parse(location).ToString("X8");
-                            if (!branchLoc.Keys.Contains(location))
+                            location = ConvertToHexEight(location);
+                            if (!branchLoc.ContainsKey(location))
                             {
-                                branchLoc.Add(location, branch + branchCount++.ToString());
+                               branchLoc.Add(location, branch + branchCount++.ToString());
                             }
                             passOne.Add(lineDetails[17] + " " + lineDetails[18]);
                             break;
@@ -159,12 +168,11 @@ namespace BinToAssembly
                 string currentRowFromPassOne = passOne[i];
                 string currentRowFromOriginalFileContent = originalFileContent[counter];
 
-                if (i == 548)
-                {
-                    var stop = true;
-                }
+                //if (i == 548)
+                //{
+                //    var stop = true;
+                //}
 
-                //var dets = originalFileContent[counter++].Split(' ');
                 var splitCurrentRow = currentRowFromOriginalFileContent.Split(' ');
                 string label = "                ";
                 foreach (KeyValuePair<string, string> memLocation in branchLoc)
@@ -186,13 +194,11 @@ namespace BinToAssembly
                     {
                         var memoryLocation = splitCurrentRow[18].Replace("#", "");
                         memoryLocation = memoryLocation.Replace("$", "").ToUpper();
+                        memoryLocation = ConvertToHexEight(memoryLocation);
                         if (memLocation.Key.Equals(memoryLocation))
                         {
-                            var hemm = currentRowFromPassOne.Split(' ');
-                            currentRowFromPassOne = hemm[0] + " " + memLocation.Value;
-                            //string value = memLocation.Value;
-                            //var location = dets[18].Replace("#", "");
-                            //location = int.Parse(location).ToString("X8");
+                            var currentRowSplit = currentRowFromPassOne.Split(' ');
+                            currentRowFromPassOne = currentRowSplit[0] + " " + memLocation.Value;
                         }
                     }
                 }
@@ -251,7 +257,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Method to
         /// </summary>
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -259,7 +265,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// Method to add labels to the `source code`
+        /// Method to display the Memory Selector dialogue
         /// </summary>
         public void DisplayMemorySelector()
         {
@@ -295,7 +301,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Method to
         /// </summary>
         private void ClearCollections()
         {
@@ -304,7 +310,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Method to
         /// </summary>
         private void ClearLeftWindow()
         {
@@ -312,7 +318,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Method to
         /// </summary>
         private void ClearRightWindow()
         {
@@ -325,7 +331,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Method to
         /// </summary>
         private void LeftWindowToolStripMenuItem_Click(
             object sender,
@@ -335,7 +341,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Method to
         /// </summary>
         private void RightWindowToolStripMenuItem_Click(
             object sender,
@@ -345,7 +351,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Method to
         /// </summary>
         private void Save(
             List<string> collection)
@@ -366,7 +372,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Method to
         /// </summary>
         private void GenerateLabelsToolStripMenuItem_Click(
             object sender,
@@ -376,7 +382,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Method to
         /// </summary>
         private void ClearToolStripMenuItem_Click(
             object sender,
@@ -390,7 +396,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Method to
         /// </summary>
         private void LabelGenerator_Click(object sender, EventArgs e)
         {
@@ -402,7 +408,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Method to
         /// </summary>
         private void CompilerTextBox_GotFocus(object sender, EventArgs e)
         {
@@ -410,7 +416,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Method to
         /// </summary>
         private void Compile_Click(object sender, EventArgs e)
         {
@@ -458,7 +464,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Method to
         /// </summary>
         private void Configure_Click(object sender, EventArgs e)
         {
@@ -466,7 +472,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Method to
         /// </summary>
         private void TextBox2_VScroll(object sender, EventArgs e)
         {
@@ -476,7 +482,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// Convert To Data DCW Click
+        ///  Method to handle the convert To Data DCW Click
         /// </summary>
         private void ConvertToDataDCWClick(object sender, EventArgs e)
         {
@@ -510,7 +516,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// Convert To Data DCB Click
+        /// Method to handle the convert To Data DCB Click
         /// </summary>
         private void ConvertToDataDCBClick(object sender, EventArgs e)
         {

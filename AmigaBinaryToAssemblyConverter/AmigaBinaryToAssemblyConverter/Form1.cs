@@ -125,11 +125,12 @@ namespace BinToAssembly
                         case "66F2": // BEQ
                         case "670A": // BEQ
                         case "6700":
+                        case "6701":
+                        //case "6901": // BVS
+                        //case "6B01": // BMI
                             string location = lineDetails[18].Replace("$", "");
                             location = location.Replace("#", "");
                             location = location.Replace("$", "").ToUpper();
-                            // TODO => Convert the location Value to X8 String
-                            //location = int.Parse(location).ToString("X8");
                             location = ConvertToHexEight(location);
                             if (!branchLoc.ContainsKey(location))
                             {

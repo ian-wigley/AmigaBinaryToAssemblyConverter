@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("6502LabelCreator")]
+[assembly: AssemblyTitle("Binary To 68000 Assembly converter")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("OSYS")]
-[assembly: AssemblyProduct("6502LabelCreator")]
-[assembly: AssemblyCopyright("Copyright © OSYS 2018")]
+[assembly: AssemblyCompany("-+-")]
+[assembly: AssemblyProduct("Binary To 68000 Assembly converter")]
+[assembly: AssemblyCopyright("2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

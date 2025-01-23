@@ -62,8 +62,7 @@ namespace BinToAssembly
                             string[] split = reader.Value.Split('¬');
                             string name = split[2];
                             GetDataType(name, out string dataSize);
-                            //if (name.Contains("BNE") || name.Contains("BEQ") || name.Contains("JSR") || name.Contains("BSR"))
-                            if (name.Contains("BNE") || name.Contains("BEQ") || name.Contains("BRA"))
+                            if (name.Contains("BNE") || name.Contains("BEQ") || name.Contains("BRA") || name.Contains("BCS") || name.Contains("BLT") || name.Contains("BMI") || name.Contains("BVS"))
                             {
                                 m_OpCodes.Add(new Branch(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
                             }

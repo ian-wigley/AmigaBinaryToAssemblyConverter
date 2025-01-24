@@ -77,7 +77,7 @@
         /// </summary>
         protected void FudgeFactor(ref string elementOne, ref string elementTwo)
         {
-            if (Code.Equals("0777"))
+            if (Code.Equals("0777") || Code.Equals("33F0") || Code.Equals("48E7") || Code.Equals("48F9") || Code.Equals("4CDF"))
             {
                 elementOne = "";
             }
@@ -85,21 +85,9 @@
             {
                 elementTwo = "";
             }
-            if (Code.Equals("33F0"))
+            if (Code.Equals("089D"))
             {
-                elementOne = "";
-            }
-            if (Code.Equals("48E7"))
-            {
-                elementOne = "";
-            }
-            if (Code.Equals("48F9"))
-            {
-                elementOne = "";
-            }
-            if (Code.Equals("4CDF"))
-            {
-                elementOne = "";
+                elementOne = elementOne.Remove(2);
             }
         }
 

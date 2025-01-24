@@ -65,7 +65,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// GetWidth
+        /// Get Width
         /// </summary>
         private int GetWidth()
         {
@@ -94,7 +94,7 @@ namespace BinToAssembly
         {
             AssemblyView.Clear();
             ClearRightWindow();
-            passTwo.Add("                *=$" + start);
+//            passTwo.Add("                *=$" + start);
             var originalFileContent = code;
             bool firstPass = true;
             string dataWord = "";
@@ -114,6 +114,12 @@ namespace BinToAssembly
 
                 var lineDetails = textBox1.Lines[count++].Split(' ');
 
+                if (lineDetails[0].Equals("00001CB4") && lineDetails[1].Equals("6700"))
+                {
+                    var debug = true;
+                }
+
+
                 if (lineDetails.Length > 1)
                 {
                     switch (lineDetails[1])
@@ -124,10 +130,13 @@ namespace BinToAssembly
                         case "66CA": // BNE
                         case "66F2": // BEQ
                         case "670A": // BEQ
-                        case "6700":
-                        case "6701":
-                        //case "6901": // BVS
-                        //case "6B01": // BMI
+                        case "6700": 
+                        case "6701": // BEQ
+                        case "6501": // BCS
+                        case "6901": // BVS
+                        case "6B01": // BMI
+                        case "6D01": // BLT
+                        case "6F01": // BLE
                             string location = lineDetails[18].Replace("$", "");
                             location = location.Replace("#", "");
                             location = location.Replace("$", "").ToUpper();
@@ -166,14 +175,14 @@ namespace BinToAssembly
             int counter = 0;
             for (int i = 0; i < passOne.Count; i++)
             {
+                if (i == 3240)
+                {
+                    var debug = true;
+                }
+
                 string currentRowFromPassOne = passOne[i];
+                // TODO when the lines are converted to either DC.B or DC.W this throws the counter out below ..
                 string currentRowFromOriginalFileContent = originalFileContent[counter];
-
-                //if (i == 548)
-                //{
-                //    var stop = true;
-                //}
-
                 var splitCurrentRow = currentRowFromOriginalFileContent.Split(' ');
                 string label = "                ";
                 foreach (KeyValuePair<string, string> memLocation in branchLoc)
@@ -183,7 +192,13 @@ namespace BinToAssembly
                         !currentRowFromOriginalFileContent.Contains("BEQ") &&
                         !currentRowFromOriginalFileContent.Contains("BNE") &&
                         !currentRowFromOriginalFileContent.Contains("BSR") &&
-                        !currentRowFromOriginalFileContent.Contains("BRA"))
+                        !currentRowFromOriginalFileContent.Contains("BRA") &&
+                        !currentRowFromOriginalFileContent.Contains("BVS") &&
+                        !currentRowFromOriginalFileContent.Contains("BCS") &&
+                        !currentRowFromOriginalFileContent.Contains("BLT") &&
+                        !currentRowFromOriginalFileContent.Contains("BLE") &&
+                        !currentRowFromOriginalFileContent.Contains("BMI")
+                        )
                     {
                         label = memLocation.Value + "         ";
                         found.Add(memLocation.Key);
@@ -191,7 +206,13 @@ namespace BinToAssembly
                     else if (currentRowFromOriginalFileContent.Contains("BEQ") || 
                         currentRowFromOriginalFileContent.Contains("BNE") ||
                         currentRowFromOriginalFileContent.Contains("BRA") ||
-                        currentRowFromOriginalFileContent.Contains("BSR"))
+                        currentRowFromOriginalFileContent.Contains("BSR") ||
+                        currentRowFromOriginalFileContent.Contains("BVS") ||
+                        currentRowFromOriginalFileContent.Contains("BCS") ||
+                        currentRowFromOriginalFileContent.Contains("BLT") ||
+                        currentRowFromOriginalFileContent.Contains("BLE") ||
+                        currentRowFromOriginalFileContent.Contains("BMI")
+                        )
                     {
                         var memoryLocation = splitCurrentRow[18].Replace("#", "");
                         memoryLocation = memoryLocation.Replace("$", "").ToUpper();
@@ -523,13 +544,14 @@ namespace BinToAssembly
         {
             string selectedText = textBox1.SelectedText;
             string[] splitSelectedText = selectedText.Split('\n');
-            var another = splitSelectedText[0].Split(' ');
-            int value = Convert.ToInt32(another[0], 16);
-            var converted = Encoding.ASCII.GetString(data, value, splitSelectedText.Length);
-            string str = another[0] + "                         DC.B '" + converted + "'";
+            var startText = splitSelectedText[0].Split(' ');
+            int start = Convert.ToInt32(startText[0], 16);
+            var endText = splitSelectedText[splitSelectedText.Length - 1].Split(' ');
+            int end = Convert.ToInt32(endText[0], 16);
+            var converted = Encoding.ASCII.GetString(data, start, end - start);
+            string str = startText[0] + "                         DC.B '" + converted + "'";
             var splitLines = SplitToNewLines(str).ToArray();
             textBox1.SelectedText = string.Join("", splitLines);
-            //textBox1.SelectedText = str;
         }
 
         /// <summary>

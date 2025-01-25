@@ -94,7 +94,6 @@ namespace BinToAssembly
         {
             AssemblyView.Clear();
             ClearRightWindow();
-//            passTwo.Add("                *=$" + start);
             var originalFileContent = code;
             bool firstPass = true;
             string dataWord = "";
@@ -118,7 +117,6 @@ namespace BinToAssembly
                 {
                     var debug = true;
                 }
-
 
                 if (lineDetails.Length > 1)
                 {
@@ -172,17 +170,11 @@ namespace BinToAssembly
             }
 
             // Add the labels to the front of the code
-            int counter = 0;
             for (int i = 0; i < passOne.Count; i++)
             {
-                if (i == 3240)
-                {
-                    var debug = true;
-                }
 
                 string currentRowFromPassOne = passOne[i];
-                // TODO when the lines are converted to either DC.B or DC.W this throws the counter out below ..
-                string currentRowFromOriginalFileContent = originalFileContent[counter];
+                string currentRowFromOriginalFileContent = textBox1.Lines[i];
                 var splitCurrentRow = currentRowFromOriginalFileContent.Split(' ');
                 string label = "                ";
                 foreach (KeyValuePair<string, string> memLocation in branchLoc)
@@ -225,7 +217,6 @@ namespace BinToAssembly
                     }
                 }
                 passTwo.Add(label + currentRowFromPassOne);
-                counter++;
             }
 
             if (found.Count != branchLoc.Count)
@@ -422,7 +413,6 @@ namespace BinToAssembly
         /// </summary>
         private void LabelGenerator_Click(object sender, EventArgs e)
         {
-            // Todo finish implementation
             DisplayMemorySelector();
             Compile.Enabled = true;
             Numbers.Select();
@@ -572,12 +562,9 @@ namespace BinToAssembly
                     line = new StringBuilder();
                     line.Append("                         DC.B '");
                 }
-
                 line.AppendFormat("{0}{1}", (line.Length > 0) ? " " : "", word);
             }
-
             yield return line.ToString().ToString();
-            
         }
     }
 }

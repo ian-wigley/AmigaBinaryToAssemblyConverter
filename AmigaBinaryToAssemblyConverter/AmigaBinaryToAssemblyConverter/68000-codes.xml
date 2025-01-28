@@ -338,10 +338,10 @@
 	<code>41¬4B¬;TODO!¬1¬¬¬¬</code>
 	<code>41¬4C¬;TODO!¬1¬¬¬¬</code>
 	<code>41¬4D¬;TODO!¬1¬¬¬¬</code>
-	<code>41¬4E¬;TODO!¬1¬¬¬¬</code>
+	<code>41¬4E¬CHK¬1¬(A6)¬¬,D0¬</code>
 	<code>41¬50¬;TODO!¬1¬¬¬¬</code>
 	<code>41¬52¬;TODO!¬1¬¬¬¬</code>
-	<code>41¬53¬;TODO!¬1¬¬¬¬</code>
+	<code>41¬53¬CHK¬1¬(A3)¬¬,D0¬</code>
 	<code>41¬54¬;TODO!¬1¬¬¬¬</code>
 	<code>41¬55¬;TODO!¬1¬¬¬¬</code>
 	<code>41¬58¬;TODO!¬1¬¬¬¬</code>
@@ -351,7 +351,7 @@
 	<code>42¬01¬CLR¬1¬D1¬¬¬</code>
 	<code>42¬20¬;TODO!¬1¬¬¬¬</code>
 	<code>42¬40¬CLR.W¬1¬D0¬¬¬</code>
-	<code>42¬41¬;TODO!¬1¬¬¬¬</code>
+	<code>42¬41¬CLR.W¬1¬D1¬¬¬¬</code>
 	<code>42¬43¬;TODO!¬1¬¬¬¬</code>
 	<code>42¬45¬;TODO!¬1¬¬¬¬</code>
 	<code>42¬49¬;TODO!¬1¬¬¬¬</code>
@@ -373,7 +373,7 @@
 	<code>43¬45¬;TODO!¬1¬¬¬¬</code>
 	<code>43¬48¬;TODO!¬1¬¬¬¬</code>
 	<code>43¬49¬;TODO!¬1¬¬¬¬</code>
-	<code>43¬4B¬;TODO!¬1¬¬¬¬</code>
+	<code>43¬4B¬CHK¬1¬(A3)¬¬,D1¬</code>
 	<code>43¬4F¬;TODO!¬1¬¬¬¬</code>
 	<code>43¬52¬;TODO!¬1¬¬¬¬</code>
 	<code>43¬54¬;TODO!¬1¬¬¬¬</code>
@@ -553,7 +553,7 @@
 	<code>4F¬54¬;TODO!¬1¬¬¬¬</code>
 	<code>4F¬55¬;TODO!¬1¬¬¬¬</code>
 	<code>4F¬56¬;TODO!¬1¬¬¬¬</code>
-	<code>4F¬57¬;TODO!¬1¬¬¬¬</code>
+	<code>4F¬57¬CHK¬1¬(A7)¬¬,D7¬</code>
 	<code>4F¬59¬;TODO!¬1¬¬¬¬</code>
 	<code>50¬00¬ADDQ.B¬1¬#$8¬¬,D0¬</code>
 	<code>50¬20¬;TODO!¬1¬¬¬¬</code>

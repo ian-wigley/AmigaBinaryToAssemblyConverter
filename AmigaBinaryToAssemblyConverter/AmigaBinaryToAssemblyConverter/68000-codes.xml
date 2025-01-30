@@ -238,20 +238,20 @@
 	<code>20¬20¬MOVE.L¬1¬-(A0)¬¬,D0¬</code>
 	<code>20¬39¬MOVE.L¬4¬$¬¬,D0¬</code>
 	<code>20¬3C¬MOVE.L¬4¬#$¬¬¬,D0¬</code>
-	<code>20¬41¬;TODO!¬1¬¬¬¬</code>
-	<code>20¬42¬;TODO!¬1¬¬¬¬</code>
-	<code>20¬43¬;TODO!¬1¬¬¬¬</code>
-	<code>20¬44¬;TODO!¬1¬¬¬¬</code>
-	<code>20¬45¬;TODO!¬1¬¬¬¬</code>
-	<code>20¬46¬;TODO!¬1¬¬¬¬</code>
+	<code>20¬41¬MOVE¬1¬D1¬¬,A0¬</code>
+	<code>20¬42¬MOVE¬1¬D2¬¬,A0¬</code>
+	<code>20¬43¬MOVE¬1¬D3¬¬,A0¬</code>
+	<code>20¬44¬MOVE¬1¬D4¬¬,A0¬</code>
+	<code>20¬45¬MOVE¬1¬D5¬¬,A0¬</code>
+	<code>20¬46¬MOVE¬1¬D6¬¬,A0¬</code>
 	<code>20¬47¬MOVE¬1¬D7¬¬,A0¬</code>
 	<code>20¬48¬;TODO!¬1¬¬¬¬</code>
 	<code>20¬49¬;TODO!¬1¬¬¬¬</code>
 	<code>20¬4A¬;TODO!¬1¬¬¬¬</code>
 	<code>20¬4B¬;TODO!¬1¬¬¬¬</code>
-	<code>20¬4C¬;TODO!¬1¬¬¬¬</code>
+	<code>20¬4C¬MOVE¬1¬A4¬¬,A0¬</code>
 	<code>20¬4D¬;TODO!¬1¬¬¬¬</code>
-	<code>20¬4E¬;TODO!¬1¬¬¬¬</code>
+	<code>20¬4E¬MOVE¬1¬A6¬¬,A0¬</code>
 	<code>20¬4F¬;TODO!¬1¬¬¬¬</code>
 	<code>20¬50¬;TODO!¬1¬¬¬¬</code>
 	<code>20¬52¬;TODO!¬1¬¬¬¬</code>
@@ -548,7 +548,7 @@
 	<code>4F¬4E¬ILLEGAL¬1¬¬¬¬</code>
 	<code>4F¬4F¬CHK¬1¬(A7)¬¬,D7¬</code>
 	<code>4F¬50¬;TODO!¬1¬¬¬¬</code>
-	<code>4F¬52¬;TODO!¬1¬¬¬¬</code>
+	<code>4F¬52¬CHK¬1¬(A2)¬¬,D7¬</code>
 	<code>4F¬53¬;TODO!¬1¬¬¬¬</code>
 	<code>4F¬54¬;TODO!¬1¬¬¬¬</code>
 	<code>4F¬55¬;TODO!¬1¬¬¬¬</code>
@@ -644,7 +644,7 @@
 	<code>57¬53¬;TODO!¬1¬¬¬¬</code>
 	<code>57¬59¬;TODO!¬1¬¬¬¬</code>
 	<code>57¬61¬SUBQ.W¬2¬#$¬¬,-(A1)¬</code>
-	<code>58¬20¬;TODO!¬1¬¬¬¬</code>
+	<code>58¬20¬ADDQ¬1¬#4¬¬,-(A0)¬</code>
 	<code>59¬20¬;TODO!¬1¬¬¬¬</code>
 	<code>59¬42¬;TODO!¬1¬¬¬¬</code>
 	<code>59¬45¬;TODO!¬1¬¬¬¬</code>
@@ -653,7 +653,7 @@
 	<code>59¬54¬;TODO!¬1¬¬¬¬</code>
 	<code>59¬57¬;TODO!¬1¬¬¬¬</code>
 	<code>59¬58¬;TODO!¬1¬¬¬¬</code>
-	<code>5A¬41¬;TODO!¬1¬¬¬¬</code>
+	<code>5A¬41¬ADDQ¬1¬#5¬¬,D1¬</code>
 	<code>5A¬45¬;TODO!¬1¬¬¬¬</code>
 	<code>5A¬59¬;TODO!¬1¬¬¬¬</code>
 	<code>5A¬5A¬;TODO!¬1¬¬¬¬</code>

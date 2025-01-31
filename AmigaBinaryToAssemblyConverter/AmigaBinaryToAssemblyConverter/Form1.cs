@@ -480,7 +480,14 @@ namespace BinToAssembly
         /// </summary>
         private void Configure_Click(object sender, EventArgs e)
         {
-            // TODO
+            var sc = populateOpCodeList.GetXMLLoader.SettingsCache;
+            ConfigureSettings cs = new ConfigureSettings(sc);
+            if (cs.ShowDialog() == DialogResult.OK)
+            {
+                // TODO
+                var t = "0";
+            }
+            var u = 0;
         }
 
         /// <summary>
@@ -565,6 +572,20 @@ namespace BinToAssembly
                 line.AppendFormat("{0}{1}", (line.Length > 0) ? " " : "", word);
             }
             yield return line.ToString().ToString();
+        }
+
+        /// <summary>
+        /// Copy the first textbox text to the clipboard
+        /// </summary>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.A))
+            {
+                textBox1.SelectAll();
+                textBox1.Copy();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

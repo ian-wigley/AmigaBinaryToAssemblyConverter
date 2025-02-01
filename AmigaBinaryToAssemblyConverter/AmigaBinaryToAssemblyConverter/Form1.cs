@@ -485,10 +485,8 @@ namespace BinToAssembly
             if (cs.ShowDialog() == DialogResult.OK)
             {
                 // TODO
-                var t = "0";
             }
-            var u = 0;
-        }
+         }
 
         /// <summary>
         /// Method to

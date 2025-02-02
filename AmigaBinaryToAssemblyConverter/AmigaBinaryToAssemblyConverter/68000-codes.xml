@@ -234,7 +234,7 @@
 	<code>1E¬3C¬MOVE.B¬2¬#$¬¬,D7¬</code>
 	<code>20¬00¬;TODO!¬1¬¬¬¬</code>
 	<code>20¬01¬;TODO!¬1¬¬¬¬</code>
-	<code>20¬09¬;TODO!¬1¬¬¬¬</code>
+	<code>20¬09¬MOVE¬1¬A1¬¬,D0¬</code>
 	<code>20¬20¬MOVE.L¬1¬-(A0)¬¬,D0¬</code>
 	<code>20¬39¬MOVE.L¬4¬$¬¬,D0¬</code>
 	<code>20¬3C¬MOVE.L¬4¬#$¬¬¬,D0¬</code>
@@ -376,7 +376,7 @@
 	<code>43¬4B¬CHK¬1¬(A3)¬¬,D1¬</code>
 	<code>43¬4F¬;TODO!¬1¬¬¬¬</code>
 	<code>43¬52¬;TODO!¬1¬¬¬¬</code>
-	<code>43¬54¬;TODO!¬1¬¬¬¬</code>
+	<code>43¬54¬CHK¬1¬(A4)¬¬,D1¬</code>
 	<code>43¬57¬;TODO!¬1¬¬¬¬</code>
 	<code>43¬6F¬ILLEGAL¬1¬¬¬¬</code>
 	<code>43¬F9¬LEA¬4¬$¬¬,A1¬</code>
@@ -397,7 +397,7 @@
 	<code>44¬59¬;TODO!¬1¬¬¬¬</code>
 	<code>45¬01¬CHK.W¬1¬D1¬¬,D2¬</code>
 	<code>45¬20¬CHK¬1¬-(A0)¬¬,D2¬</code>
-	<code>45¬41¬;TODO!¬1¬¬¬¬</code>
+	<code>45¬41¬CHK.W¬1¬D1¬¬,D2¬</code>
 	<code>45¬43¬;TODO!¬1¬¬¬¬</code>
 	<code>45¬44¬;TODO!¬1¬¬¬¬</code>
 	<code>45¬45¬;TODO!¬1¬¬¬¬</code>
@@ -549,7 +549,7 @@
 	<code>4F¬4F¬CHK¬1¬(A7)¬¬,D7¬</code>
 	<code>4F¬50¬;TODO!¬1¬¬¬¬</code>
 	<code>4F¬52¬CHK¬1¬(A2)¬¬,D7¬</code>
-	<code>4F¬53¬;TODO!¬1¬¬¬¬</code>
+	<code>4F¬53¬CHK¬1¬(A3)¬¬,D7¬</code>
 	<code>4F¬54¬;TODO!¬1¬¬¬¬</code>
 	<code>4F¬55¬;TODO!¬1¬¬¬¬</code>
 	<code>4F¬56¬;TODO!¬1¬¬¬¬</code>
@@ -569,7 +569,7 @@
 	<code>51¬55¬SUBQ¬1¬#8¬¬,(A5)¬</code>
 	<code>51¬C8¬DBF¬2¬D0,$¬¬¬</code>
 	<code>51¬CA¬DBF¬2¬D2,$¬¬¬</code>
-	<code>52¬20¬;TODO!¬1¬¬¬¬</code>
+	<code>52¬20¬ADDQ¬1¬#1¬¬,-(A0)¬</code>
 	<code>52¬39¬ADD¬2¬#$¬,$¬¬</code>
 	<code>52¬40¬ADDQ¬1¬#$¬¬,D0¬</code>
 	<code>52¬41¬;TODO!¬1¬¬¬¬</code>
@@ -595,7 +595,7 @@
 	<code>53¬48¬;TODO!¬1¬¬¬¬</code>
 	<code>53¬49¬;TODO!¬1¬¬¬¬</code>
 	<code>53¬4C¬;TODO!¬1¬¬¬¬</code>
-	<code>53¬4F¬;TODO!¬1¬¬¬¬</code>
+	<code>53¬4F¬SUBQ¬1¬#1¬¬,A7¬</code>
 	<code>53¬50¬;TODO!¬1¬¬¬¬</code>
 	<code>53¬51¬;TODO!¬1¬¬¬¬</code>
 	<code>53¬53¬;TODO!¬1¬¬¬¬</code>
@@ -606,7 +606,7 @@
 	<code>53¬5B¬;TODO!¬1¬¬¬¬</code>
 	<code>53¬61¬SUBQ.W¬1¬#$¬¬,-(A1)¬</code>
 	<code>54¬20¬ADDQ¬1¬#2¬¬,-(A0)¬</code>
-	<code>54¬41¬;TODO!¬1¬¬¬¬</code>
+	<code>54¬41¬ADDQ¬1¬#2¬¬,D1¬</code>
 	<code>54¬43¬;TODO!¬1¬¬¬¬</code>
 	<code>54¬45¬ADDQ.W¬1¬#1¬¬,(A3)¬</code>
 	<code>54¬46¬;TODO!¬1¬¬¬¬</code>

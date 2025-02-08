@@ -25,7 +25,7 @@ namespace BinToAssembly
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Error occured whilst loading data ", exception.Message);
+                MessageBox.Show("Error occurred whilst loading data ", exception.Message);
                 return new byte[0];
             }
         }

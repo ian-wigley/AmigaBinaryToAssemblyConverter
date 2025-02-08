@@ -17,12 +17,12 @@ namespace BinToAssembly
                     startAddress1.Text + startAddress2.Text + startAddress3.Text + startAddress4.Text + startAddress5.Text + startAddress6.Text + startAddress7.Text + startAddress8.Text;
             }
         }
-        public string GetSelectedMemEndLocation { 
-            get 
-            { 
-                return 
+        public string GetSelectedMemEndLocation {
+            get
+            {
+                return
                     endAddress1.Text + endAddress2.Text + endAddress3.Text + endAddress4.Text + endAddress5.Text + endAddress6.Text + endAddress7.Text + endAddress8.Text;
-            } 
+            }
         }
 
         public MemorySelector(

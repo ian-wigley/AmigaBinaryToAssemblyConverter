@@ -75,7 +75,7 @@
             string binTwo = !elementTwo.Equals("") ? elementTwo : pad;
 
             FudgeFactor(ref elementOne, ref elementTwo);
-            
+
             string returnLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
             return returnLine;
         }

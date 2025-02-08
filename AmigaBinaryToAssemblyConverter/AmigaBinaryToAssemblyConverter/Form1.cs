@@ -82,7 +82,7 @@ namespace BinToAssembly
         /// </summary>
         private string ConvertToHexEight(string value)
         {
-            return int.Parse(value, System.Globalization.NumberStyles.HexNumber).ToString("X8"); ;
+            return int.Parse(value, System.Globalization.NumberStyles.HexNumber).ToString("X8");
          }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace BinToAssembly
                         case "66CA": // BNE
                         case "66F2": // BEQ
                         case "670A": // BEQ
-                        case "6700": 
+                        case "6700":
                         case "6701": // BEQ
                         case "6501": // BCS
                         case "6901": // BVS
@@ -149,13 +149,13 @@ namespace BinToAssembly
                             passOne.Add(lineDetails[21] + " " + lineDetails[22]);
                             break;
                         default:
-                            // Add the DC.W's 
+                            // Add the DC.W's
                             if (dataWord != "")
                             {
                                 passOne.Add(dataWord);
                                 dataWord = "";
                             }
-                            else 
+                            else
                             {
                                 int indexLength = lineDetails.Length;
                                 passOne.Add(lineDetails[indexLength - 2] + " " + lineDetails[indexLength - 1]);
@@ -195,7 +195,7 @@ namespace BinToAssembly
                         label = memLocation.Value + "         ";
                         found.Add(memLocation.Key);
                     }
-                    else if (currentRowFromOriginalFileContent.Contains("BEQ") || 
+                    else if (currentRowFromOriginalFileContent.Contains("BEQ") ||
                         currentRowFromOriginalFileContent.Contains("BNE") ||
                         currentRowFromOriginalFileContent.Contains("BRA") ||
                         currentRowFromOriginalFileContent.Contains("BSR") ||
@@ -405,7 +405,6 @@ namespace BinToAssembly
             textBox1.Clear();
             AssemblyView.Clear();
             byteviewer.SetBytes(new byte[] { });
-            //lineNumbers = 0;
         }
 
         /// <summary>
@@ -437,7 +436,7 @@ namespace BinToAssembly
             CompilerTextBox.Text = "";
 
             // Get a random temporary file name
-            string tempFile = Path.GetTempFileName();
+            string tempFile =  Path.GetRandomFileName();
 
             // Convert the lines of Text to a byte array
             byte[] dataAsBytes = AssemblyView.Lines.SelectMany(s => System.Text.Encoding.UTF8.GetBytes(s + Environment.NewLine)).ToArray();

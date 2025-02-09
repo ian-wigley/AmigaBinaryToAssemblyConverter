@@ -478,7 +478,7 @@
 	<code>4A¬11¬TST.B¬1¬(A1)¬¬¬</code>
 	<code>4A¬13¬TST¬1¬(A3)¬¬¬</code>
 	<code>4A¬41¬;TODO!¬1¬¬¬¬</code>
-	<code>4A¬45¬;TODO!¬1¬¬¬¬</code>
+	<code>4A¬45¬TST¬1¬D5¬¬¬</code>
 	<code>4A¬55¬;TODO!¬1¬¬¬¬</code>
 	<code>4B¬20¬CHK¬1¬-(A0)¬¬,D5¬</code>
 	<code>4B¬41¬;TODO!¬1¬¬¬¬</code>
@@ -539,7 +539,7 @@
 	<code>4F¬41¬;TODO!¬1¬¬¬¬</code>
 	<code>4F¬42¬;TODO!¬1¬¬¬¬</code>
 	<code>4F¬44¬;TODO!¬1¬¬¬¬</code>
-	<code>4F¬46¬;TODO!¬1¬¬¬¬</code>
+	<code>4F¬46¬CHK¬1¬D6¬¬,D7¬</code>
 	<code>4F¬47¬;TODO!¬1¬¬¬¬</code>
 	<code>4F¬48¬;TODO!¬1¬¬¬¬</code>
 	<code>4F¬4B¬;TODO!¬1¬¬¬¬</code>
@@ -631,7 +631,7 @@
 	<code>55¬50¬;TODO!¬1¬¬¬¬</code>
 	<code>55¬52¬;TODO!¬1¬¬¬¬</code>
 	<code>55¬53¬;TODO!¬1¬¬¬¬</code>
-	<code>55¬54¬;TODO!¬1¬¬¬¬</code>
+	<code>55¬54¬SUBQ.W¬1¬#2¬¬,(A4)¬</code>
 	<code>55¬59¬;TODO!¬1¬¬¬¬</code>
 	<code>56¬45¬ADDQ¬1¬#3¬¬,D5¬</code>
 	<code>56¬49¬;TODO!¬1¬¬¬¬</code>

@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Text;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace BinToAssembly
 {
@@ -100,6 +101,9 @@ namespace BinToAssembly
             int count = 0;
             int branchCount = 0;
 
+            int userSelectedFileEnd = int.Parse(end, System.Globalization.NumberStyles.HexNumber);
+            int originalFileLength = originalFileContent.Count;
+
             // First pass parses the content looking for branch & jump conditions
             while (firstPass)
             {
@@ -111,12 +115,12 @@ namespace BinToAssembly
                     dataWord = dataWord.Substring(startLocation, dataWord.Length - startLocation);
                 }
 
-                var lineDetails = textBox1.Lines[count++].Split(' ');
+                string[] lineDetails = textBox1.Lines[count++].Split(' ');
 
-                if (lineDetails[0].Equals("00001CB4") && lineDetails[1].Equals("6700"))
-                {
-                    var debug = true;
-                }
+                //if (lineDetails[0].Equals("00001CB4") && lineDetails[1].Equals("6700"))
+                //{
+                //    var debug = true;
+                //}
 
                 if (lineDetails.Length > 1)
                 {
@@ -163,7 +167,7 @@ namespace BinToAssembly
                             break;
                     }
                 }
-                if (count >= int.Parse(end, System.Globalization.NumberStyles.HexNumber) || count >= originalFileContent.Count || lineDetails[0].ToLower().Contains(end.ToLower()))
+                if (count >= userSelectedFileEnd || count >= originalFileLength || lineDetails[0].ToLower().Contains(end.ToLower()))
                 {
                     firstPass = false;
                 }
@@ -572,14 +576,17 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// Copy the first textbox text to the clipboard
+        /// Development debug helper method.
+        /// Copy all the lines containing the text `;TODO!` to the clipboard
         /// </summary>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Control | Keys.A))
             {
-                textBox1.SelectAll();
-                textBox1.Copy();
+                var todo = textBox1.Lines.ToList().FindAll(x => x.Contains(";TODO!"));
+                string temp = "";
+                foreach (object item in todo) temp += item.ToString() + "\r\n";
+                Clipboard.SetText(temp);
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);

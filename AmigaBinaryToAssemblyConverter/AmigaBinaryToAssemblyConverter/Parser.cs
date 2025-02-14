@@ -918,6 +918,7 @@ namespace BinToAssembly
                 case "786E":
                 case "7E35": // MOVEQ
                 case "7FFF":
+                case "8B4C":
                 case "90FC":
                 case "9701":
                 case "9801":

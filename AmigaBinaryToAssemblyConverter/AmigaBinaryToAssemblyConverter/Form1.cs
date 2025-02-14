@@ -586,7 +586,10 @@ namespace BinToAssembly
                 var todo = textBox1.Lines.ToList().FindAll(x => x.Contains(";TODO!"));
                 string temp = "";
                 foreach (object item in todo) temp += item.ToString() + "\r\n";
-                Clipboard.SetText(temp);
+                if (temp != "")
+                {
+                    Clipboard.SetText(temp);
+                }
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);

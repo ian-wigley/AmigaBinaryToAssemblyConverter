@@ -77,9 +77,13 @@
         /// </summary>
         protected void FudgeFactor(ref string elementOne, ref string elementTwo)
         {
-            if (Code.Equals("0777") || Code.Equals("33F0") || Code.Equals("48E7") || Code.Equals("48F9") || Code.Equals("4CDF"))
+            if (Code.Equals("0777") || Code.Equals("0977") || Code.Equals("33F0") || Code.Equals("48E7") || Code.Equals("48F9") || Code.Equals("4CDF"))
             {
                 elementOne = "";
+            }
+            if (Code.Equals("0620"))
+            { 
+                elementOne = elementOne.Remove(0, 2); 
             }
             if (Code.Equals("23E9"))
             {

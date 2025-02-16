@@ -127,6 +127,7 @@ namespace BinToAssembly
                     switch (lineDetails[1])
                     {
                         case "6000": // BRA
+                        case "60EC": // BRA
                         case "6100": // BSR
                         case "6600": // BNE
                         case "66CA": // BNE

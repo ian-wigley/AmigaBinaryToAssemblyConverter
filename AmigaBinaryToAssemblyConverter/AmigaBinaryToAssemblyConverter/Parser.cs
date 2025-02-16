@@ -136,12 +136,20 @@ namespace BinToAssembly
                 case "0005":
                 case "0007":
                 case "0008":
+                case "000A":
                 case "0010":
                 case "0014":
                 case "0015":
                 case "0016":
                 case "0018":
+                case "001B":
+                case "001C":
+                case "001D":
+                case "001E":
                 case "0020":
+                case "0021":
+                case "0022":
+                case "0024":
                 case "0028":
                 case "0034":
                 case "0040":

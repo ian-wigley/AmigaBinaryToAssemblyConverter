@@ -68,7 +68,7 @@
 	<code>00¬74¬TRAP¬2¬¬¬¬</code>
 	<code>00¬75¬TRAPV¬2¬¬¬¬</code>
 	<code>00¬77¬UNLK¬2¬¬¬¬</code>
-	<code>00¬79¬OR¬6¬#$¬¬¬¬</code>
+	<code>00¬79¬OR¬6¬#$¬,$¬¬¬</code>
 	<code>00¬8E¬ILLEGAL¬1¬¬¬¬</code>
 	<code>00¬92¬OR¬4¬#$¬,$¬(A2)¬</code>
 	<code>00¬96¬OR¬4¬#$¬,$¬(A6)¬</code>
@@ -301,7 +301,7 @@
 	<code>2C¬79¬MOVEA.L¬4¬$¬¬,A6¬</code>
 	<code>2D¬61¬MOVE.L¬2¬-(A1),$¬¬(A6)¬</code>
 	<code>2D¬77¬MOVE.L¬12¬A7¬¬,(A6)¬</code>
-	<code>2D¬7A¬MOVE.L¬4¬#$¬¬,$¬(A0)¬</code>
+	<code>2D¬7A¬MOVE.L¬4¬#$¬,$¬¬(A6)¬</code>
 	<code>2E¬69¬MOVEA.L¬2¬$¬¬(A1)¬,A7¬</code>
 	<code>2E¬6C¬MOVEA.L¬2¬A4¬,A7¬¬</code>
 	<code>30¬3C¬MOVE.W¬2¬#$¬,D0¬¬</code>
@@ -328,7 +328,7 @@
 	<code>3B¬7C¬MOVE.W¬4¬#$¬,$¬(A5)¬</code>
 	<code>3C¬3C¬MOVE.W¬2¬#$¬,D6¬¬</code>
 	<code>3D¬01¬MOVE.W¬1¬D1¬¬,-(A6)¬</code>
-	<code>3D¬7A¬MOVE.W¬4¬PC¬¬,A6¬</code>
+	<code>3D¬7A¬MOVE.W¬4¬$¬(PC),$¬¬(A6)¬</code>
 	<code>3D¬7C¬MOVE.W¬4¬#$¬,$¬(A6)¬</code>
 	<code>3F¬01¬MOVE.W¬1¬D1¬¬,-(A7)¬</code>
 	<code>40¬00¬MOVE.W¬1¬SR,D0¬¬¬</code>
@@ -580,7 +580,7 @@
 	<code>52¬39¬ADD¬2¬#$¬,$¬¬</code>
 	<code>52¬40¬ADDQ¬1¬#$¬¬,D0¬</code>
 	<code>52¬41¬ADDQ.W¬1¬#1¬¬,D1¬</code>
-	<code>52¬43¬ADDQ¬1¬#$¬¬,D3¬</code>
+	<code>52¬43¬ADDQ¬1¬#1¬¬,D3¬</code>
 	<code>52¬44¬ADDQ¬1¬#1¬¬,D4¬</code>
 	<code>52¬45¬ADDQ¬1¬#1¬¬,D5¬</code>
 	<code>52¬46¬ADDQ.W¬1¬#1¬¬,D6¬</code>
@@ -619,7 +619,7 @@
 	<code>54¬46¬ADDQ.W¬1¬#2¬¬,D6¬</code>
 	<code>54¬48¬ADDQ¬1¬#2¬¬,A0¬</code>
 	<code>54¬49¬ADDQ.W¬1¬#2¬¬,A1¬</code>
-	<code>54¬4B¬ADDAQ¬1¬#$¬¬,A3¬</code>
+	<code>54¬4B¬ADDQ¬1¬#2¬¬,A3¬</code>
 	<code>54¬4C¬ADDQ.W¬1¬#2¬¬,A4¬</code>
 	<code>54¬4F¬ADDQ.W¬1¬#2¬¬,A7¬</code>
 	<code>54¬53¬ADDQ.W¬1¬#2¬¬,(A3)¬</code>
@@ -668,7 +668,7 @@
 	<code>5B¬4C¬SUBQ.W¬1¬#5¬¬,A4¬</code>
 	<code>5B¬5B¬SUBQ¬1¬#5¬¬,(A0)+¬</code>
 	<code>5C¬44¬ADDQ.W¬1¬#$¬¬,D4¬</code>
-	<code>5C¬4B¬ADDAQ¬1¬#$¬¬,A3¬</code>
+	<code>5C¬4B¬ADDQ¬1¬#2¬¬,A3¬</code>
 	<code>5C¬55¬ADDQ.W¬1¬#$¬¬,(A5)¬</code>
 	<code>5C¬67¬ADDQ.W¬1¬#$¬¬,-(A7)¬</code>
 	<code>5C¬69¬ADDQ.W¬2¬#$¬¬,(A1)¬</code>

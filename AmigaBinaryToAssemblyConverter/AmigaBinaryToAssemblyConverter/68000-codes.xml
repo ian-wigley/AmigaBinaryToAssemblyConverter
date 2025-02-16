@@ -12,6 +12,7 @@
 	<code>00¬07¬OR¬2¬#$¬¬,D7¬</code>
 	<code>00¬08¬OR¬2¬#$¬¬,(A0)¬</code>
 	<code>00¬09¬BCC¬2¬¬¬¬</code>
+	<code>00¬0A¬OR¬2¬#$¬¬,(A2)¬</code>
 	<code>00¬10¬OR¬2¬#$¬¬,(A0)¬</code>
 	<code>00¬11¬BCLR¬2¬¬¬¬</code>
 	<code>00¬14¬OR¬2¬#$¬¬,(A4)¬</code>
@@ -19,6 +20,10 @@
 	<code>00¬16¬OR¬2¬#$¬¬,(A6)¬</code>
 	<code>00¬18¬OR¬2¬#$¬¬,(A0)+¬</code>
 	<code>00¬1A¬OR¬2¬#$¬¬,(A2)+¬</code>
+	<code>00¬1B¬OR¬2¬#$¬¬,(A3)+¬</code>
+	<code>00¬1C¬OR¬2¬#$¬¬,(A4)+¬</code>
+	<code>00¬1D¬OR¬2¬#$¬¬,(A5)+¬</code>
+	<code>00¬1E¬OR¬2¬#$¬¬,(A6)+¬</code>
 	<code>00¬20¬OR¬2¬#$¬¬,-(A0)¬</code>
 	<code>00¬21¬CMPM¬2¬¬¬¬</code>
 	<code>00¬22¬cpGEN¬2¬¬¬¬</code>
@@ -109,7 +114,7 @@
 	<code>01¬8E¬MOVEP.W¬2¬D0,$¬¬(A6)¬</code>
 	<code>01¬90¬BCLR¬1¬D0¬¬,(A0)¬</code>
 	<code>01¬98¬BCLR¬1¬D0¬¬,(A0)+¬</code>
-	<code>01¬B0¬BCLR.B¬2¬D0¬¬,(A0)¬</code>
+	<code>01¬B0¬BCLR.B¬2¬D0,$¬¬,(A0,D0)¬</code>
 	<code>01¬C0¬BSET.L¬1¬D0¬¬,D0¬</code>
 	<code>01¬D2¬BSET.B¬1¬D0¬¬,(A2)¬</code>
 	<code>01¬D4¬BSET.B¬1¬D0¬¬,(A4)¬</code>
@@ -289,7 +294,7 @@
 	<code>23¬FC¬MOVE.L¬8¬#$¬¬,$¬</code>
 	<code>26¬01¬MOVE.L¬1¬D1¬¬,D3¬</code>
 	<code>26¬7A¬MOVE.L¬2¬PC¬¬,A3¬</code>
-	<code>28¬29¬MOVEA¬2¬A1¬¬,D4¬</code>
+	<code>28¬29¬MOVEA¬2¬$¬(A1)¬,D4¬</code>
 	<code>28¬9A¬MOVE.L¬1¬(A2)+¬,(A4)¬¬</code>
 	<code>29¬01¬MOVE.L¬1¬D1¬¬,-(A4)¬</code>
 	<code>29¬40¬MOVE.L¬2¬D0,$¬(A4)¬¬</code>
@@ -682,49 +687,48 @@
 	<code>61¬6D¬BSR.B¬1¬$¬¬¬</code>
 	<code>61¬70¬BSR.W¬1¬$¬¬¬</code>
 	<code>61¬76¬BSR.B¬1¬$¬¬¬</code>
-	<code>62¬61¬BHI.B¬1¬#$¬¬¬</code>
+	<code>62¬61¬BHI.B¬1¬$¬¬¬</code>
 	<code>63¬3A¬BLS.B¬1¬$¬¬¬</code>
 	<code>63¬68¬BLS.B¬1¬$¬¬¬</code>
 	<code>63¬6F¬BLS.B¬1¬$¬¬¬¬</code>
 	<code>63¬73¬BLS.W¬1¬$¬¬¬</code>
-	<code>64¬65¬BCC.B¬1¬#$¬¬¬</code>
-	<code>64¬73¬BCC.B¬1¬#$¬¬¬</code>
-	<code>65¬00¬BCS.W¬2¬#$¬¬¬</code>
+	<code>64¬65¬BCC.B¬1¬$¬¬¬</code>
+	<code>64¬73¬BCC.B¬1¬$¬¬¬</code>
+	<code>65¬00¬BCS.W¬2¬$¬¬¬</code>
 	<code>65¬01¬BCS.W¬1¬$¬¬¬</code>
-	<code>65¬2D¬BCS.B¬1¬#$¬¬¬</code>
-	<code>65¬63¬BCS.B¬1¬#$¬¬¬</code>
-	<code>65¬6E¬BCS.B¬1¬#$¬¬¬</code>
-	<code>65¬72¬BCS.B¬1¬#$¬¬¬</code>
-	<code>65¬78¬BCS.B¬1¬#$¬¬¬</code>
-	<code>66¬00¬BNE.W¬2¬#$¬¬¬</code>
-	<code>66¬CA¬BNE¬1¬#$¬¬¬</code>
-	<code>66¬CE¬BNE¬1¬#$¬¬¬</code>
-	<code>66¬F2¬BNE¬1¬#$¬¬¬</code>
+	<code>65¬2D¬BCS.B¬1¬$¬¬¬</code>
+	<code>65¬63¬BCS.B¬1¬$¬¬¬</code>
+	<code>65¬6E¬BCS.B¬1¬$¬¬¬</code>
+	<code>65¬72¬BCS.B¬1¬$¬¬¬</code>
+	<code>65¬78¬BCS.B¬1¬$¬¬¬</code>
+	<code>66¬00¬BNE.W¬2¬$¬¬¬</code>
+	<code>66¬CA¬BNE¬1¬$¬¬¬</code>
+	<code>66¬CE¬BNE¬1¬$¬¬¬</code>
+	<code>66¬F2¬BNE¬1¬$¬¬¬</code>
 	<code>66¬F6¬BNE¬2¬¬¬¬</code>
 	<code>67¬00¬BEQ¬2¬¬¬¬</code>
 	<code>67¬01¬BEQ¬1¬$¬¬¬</code>
 	<code>67¬0A¬BEQ¬1¬$¬¬¬</code>
-	<code>67¬61¬BEQ.B¬1¬#$¬¬¬</code>
-	<code>67¬66¬BEQ.B¬1¬#$¬¬¬</code>
+	<code>67¬61¬BEQ.B¬1¬$¬¬¬</code>
+	<code>67¬66¬BEQ.B¬1¬$¬¬¬</code>
 	<code>67¬72¬BEQ¬1¬$¬¬¬</code>
 	<code>68¬69¬BVC.W¬1¬$¬¬¬</code>
 	<code>69¬01¬BVS¬1¬$¬¬¬</code>
-	<!--<code>69¬63¬BVS¬1¬$¬¬,D0¬</code>-->
 	<code>69¬63¬BVS¬1¬$¬¬¬</code>
 	<code>69¬67¬BVS¬1¬$¬¬¬</code>
 	<code>69¬6E¬BVS¬1¬$¬¬¬</code>
 	<code>69¬74¬BVS¬1¬$¬¬¬</code>
 	<code>6B¬01¬BMI¬1¬$¬¬¬</code>
-	<code>6B¬6D¬BMI¬1¬#$¬¬¬</code>
-	<code>6C¬69¬BGE¬1¬#$¬¬¬</code>
-	<code>6C¬6F¬BGE¬1¬#$¬¬¬</code>
-	<code>6C¬75¬BGE¬1¬#$¬¬¬</code>
+	<code>6B¬6D¬BMI¬1¬$¬¬¬</code>
+	<code>6C¬69¬BGE¬1¬$¬¬¬</code>
+	<code>6C¬6F¬BGE¬1¬$¬¬¬</code>
+	<code>6C¬75¬BGE¬1¬$¬¬¬</code>
 	<code>6D¬01¬BLT¬1¬$¬¬¬</code>
 	<code>6D¬6F¬BLT¬1¬$¬¬¬</code>
-	<code>6E¬63¬BGT¬1¬#$¬¬¬</code>
-	<code>6E¬64¬BGT¬1¬#$¬¬¬</code>
-	<code>6E¬6C¬BGT¬1¬#$¬¬¬</code>
-	<code>6E¬74¬BGT¬1¬#$¬¬¬</code>
+	<code>6E¬63¬BGT¬1¬$¬¬¬</code>
+	<code>6E¬64¬BGT¬1¬$¬¬¬</code>
+	<code>6E¬6C¬BGT¬1¬$¬¬¬</code>
+	<code>6E¬74¬BGT¬1¬$¬¬¬</code>
 	<code>6F¬01¬BLE¬1¬$¬¬¬</code>
 	<code>6F¬61¬BLE¬1¬$¬¬¬</code>
 	<code>6F¬70¬BLE¬1¬$¬¬¬</code>
@@ -839,7 +843,7 @@
 	<code>E1¬01¬ILLEGAL¬1¬¬¬¬</code>
 	<code>E2¬01¬ASR.B¬1¬#1¬¬,D1¬</code>
 	<code>E2¬18¬ROR.B¬1¬#1¬¬,D0¬</code>
-	<code>E2¬89¬LSR¬2¬#$¬¬,D1¬</code>
+	<code>E2¬89¬LSR¬1¬#1¬¬,D1¬</code>
 	<code>E3¬01¬ILLEGAL¬1¬¬¬¬</code>
 	<code>E4¬01¬ILLEGAL¬1¬¬¬¬</code>
 	<code>E5¬01¬ASL.B¬1¬#2¬¬,D1¬</code>
@@ -855,7 +859,7 @@
 	<code>E9¬01¬ASL.B¬1¬#4¬¬,D1¬</code>
 	<code>EA¬01¬;TODO!¬1¬¬¬¬</code>
 	<code>EC¬01¬ASR.B¬1¬#6¬¬,D1¬</code>
-	<code>EE¬49¬LSR¬2¬#$¬¬,D1¬</code>
+	<code>EE¬49¬LSR¬1¬#7¬¬,D1¬</code>
 	<code>EF¬01¬ASL.B¬1¬#7¬¬,D1¬</code>
 	<code>F0¬01¬ILLEGAL¬1¬¬¬¬</code>
 	<code>F2¬01¬ILLEGAL¬1¬¬¬¬</code>

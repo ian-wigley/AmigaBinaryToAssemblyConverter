@@ -25,10 +25,12 @@
 	<code>00¬1D¬OR¬2¬#$¬¬,(A5)+¬</code>
 	<code>00¬1E¬OR¬2¬#$¬¬,(A6)+¬</code>
 	<code>00¬20¬OR¬2¬#$¬¬,-(A0)¬</code>
-	<code>00¬21¬CMPM¬2¬¬¬¬</code>
-	<code>00¬22¬cpGEN¬2¬¬¬¬</code>
+	
+	<code>00¬21¬OR¬2¬#$¬¬,-(A1)¬</code>
+	<code>00¬22¬OR¬2¬#$¬¬,-(A2)¬</code>
 	<code>00¬23¬DBCC¬2¬¬¬¬</code>
-	<code>00¬24¬DIVS¬2¬¬¬¬</code>
+	<code>00¬24¬OR¬2¬#$¬¬,-(A4)¬</code>
+	
 	<code>00¬25¬DIVU¬2¬¬¬¬</code>
 	<code>00¬26¬EOR¬2¬¬¬¬</code>
 	<code>00¬27¬EORI¬2¬¬¬¬</code>
@@ -77,12 +79,12 @@
 	<code>00¬8E¬ILLEGAL¬1¬¬¬¬</code>
 	<code>00¬92¬OR¬4¬#$¬,$¬(A2)¬</code>
 	<code>00¬96¬OR¬4¬#$¬,$¬(A6)¬</code>
-	<code>00¬B1¬OR¬6¬#$¬¬,(A1)¬</code>
-	<code>00¬B3¬OR¬6¬#$¬¬,(A3)¬</code>
-	<code>00¬B4¬OR¬6¬#$¬¬,(A4)¬</code>
-	<code>00¬B5¬OR¬6¬#$¬¬,(A5)¬</code>
-	<code>00¬B6¬OR¬6¬#$¬¬,(A6)¬</code>
-	<code>00¬B7¬OR¬6¬#$¬¬,(A7)¬</code>
+	<code>00¬B1¬OR¬6¬#$¬¬,$¬(A1)¬</code>
+	<code>00¬B3¬OR¬6¬#$¬¬,$¬(A3)¬</code>
+	<code>00¬B4¬OR¬6¬#$¬¬,$¬(A4)¬</code>
+	<code>00¬B5¬OR¬6¬#$¬¬,$¬(A5)¬</code>
+	<code>00¬B6¬OR¬6¬#$¬¬,$¬(A6)¬</code>
+	<code>00¬B7¬OR¬6¬#$¬¬,$¬(A7)¬</code>
 	<code>00¬B8¬OR¬6¬#$¬,$¬¬</code>
 	<code>00¬D0¬OR¬2¬#$¬¬,(A0)¬</code>
 	<code>00¬E0¬OR¬2¬#$¬,¬-(A0)¬</code>
@@ -114,7 +116,7 @@
 	<code>01¬8E¬MOVEP.W¬2¬D0,$¬¬(A6)¬</code>
 	<code>01¬90¬BCLR¬1¬D0¬¬,(A0)¬</code>
 	<code>01¬98¬BCLR¬1¬D0¬¬,(A0)+¬</code>
-	<code>01¬B0¬BCLR.B¬2¬D0,$¬¬,(A0,D0)¬</code>
+	<code>01¬B0¬BCLR.B¬2¬D0,$¬¬(A0)¬</code>
 	<code>01¬C0¬BSET.L¬1¬D0¬¬,D0¬</code>
 	<code>01¬D2¬BSET.B¬1¬D0¬¬,(A2)¬</code>
 	<code>01¬D4¬BSET.B¬1¬D0¬¬,(A4)¬</code>

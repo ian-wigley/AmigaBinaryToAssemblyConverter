@@ -296,7 +296,7 @@
 	<code>23¬FC¬MOVE.L¬8¬#$¬¬,$¬</code>
 	<code>26¬01¬MOVE.L¬1¬D1¬¬,D3¬</code>
 	<code>26¬7A¬MOVE.L¬2¬PC¬¬,A3¬</code>
-	<code>28¬29¬MOVEA¬2¬$¬(A1)¬,D4¬</code>
+	<code>28¬29¬MOVE¬2¬$¬(A1)¬,D4¬</code>
 	<code>28¬9A¬MOVE.L¬1¬(A2)+¬,(A4)¬¬</code>
 	<code>29¬01¬MOVE.L¬1¬D1¬¬,-(A4)¬</code>
 	<code>29¬40¬MOVE.L¬2¬D0,$¬(A4)¬¬</code>

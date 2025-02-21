@@ -302,7 +302,13 @@ namespace BinToAssembly
                 case "48E7":
                 case "4CDF":
                 case "7000":
+                    line += oc.Detail(ref filePosition, binaryFileData);
+                    break;
+
                 case "7450":
+                    line += oc.Detail(ref filePosition, binaryFileData);
+                    break;
+
                 case "2E6C":
                 case "7261":
                 case "7279":
@@ -362,7 +368,11 @@ namespace BinToAssembly
                 case "6869":
                 case "6373":
                 case "6974":
+                    line += oc.Detail(ref filePosition, binaryFileData);
+                    break;
                 case "6D6F": // BGE
+                    line += oc.Detail(ref filePosition, binaryFileData);
+                    break;
                 case "6C6F":
                 case "6F70":
                     line += oc.Detail(ref filePosition, binaryFileData);

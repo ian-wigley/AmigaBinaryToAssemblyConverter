@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyCreator.cs" />
     <Compile Include="ConfigureSettings.cs">
       <SubType>Form</SubType>
     </Compile>

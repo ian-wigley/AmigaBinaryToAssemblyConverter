@@ -7,19 +7,14 @@ using System.Windows.Forms;
 
 namespace BinToAssembly
 {
-    class AssemblyCreator
+    public class AssemblyCreator
     {
-        private readonly TextBox textBox;
+        public string[] Code { get; set; }
         private readonly string branch = "BRANCH";
-        private readonly List<string> passOne = new List<string>();
+        public List<string> PassOned { get; private set; } = new List<string>();
         private readonly List<string> passTwo = new List<string>();
         private readonly List<string> found = new List<string>();
         private readonly Dictionary<string, string> branchLoc = new Dictionary<string, string>();
-
-        public AssemblyCreator(TextBox textBox1)
-        {
-            textBox = textBox1;
-        }
 
         /// <summary>
         /// Convert To Hex Eight
@@ -29,45 +24,41 @@ namespace BinToAssembly
             return int.Parse(value, System.Globalization.NumberStyles.HexNumber).ToString("X8");
         }
 
+        /// <summary>
+        /// PassOne
+        /// </summary>
         public void PassOne(
             string start,
             string end,
-            List<string> code
+            List<string> originalFileContent
             )
         {
-            var originalFileContent = code;
             bool firstPass = true;
             string dataWord = "";
             int count = 0;
             int branchCount = 0;
 
             int userSelectedFileEnd = int.Parse(end, System.Globalization.NumberStyles.HexNumber);
-            int originalFileLength = originalFileContent.Count;
+            int originalFileLength = Code.Length;
 
             // First pass parses the content looking for branch & jump conditions
             while (firstPass)
             {
                 // Split each line into an array
-                if (textBox.Lines[count].Contains("DC.B"))
+                if (Code[count].Contains("DC.B"))
                 {
-                    dataWord = textBox.Lines[count];
+                    dataWord = Code[count];
                     int startLocation = dataWord.IndexOf("DC.B");
                     dataWord = dataWord.Substring(startLocation, dataWord.Length - startLocation);
                 }
 
-                string[] lineDetails = textBox.Lines[count++].Split(' ');
-
-                //if (lineDetails[0].Equals("00001CB4") && lineDetails[1].Equals("6700"))
-                if (lineDetails[1].Equals("4EF9"))
-                {
-                    var debug = true;
-                }
-
+                string[] lineDetails = Code[count++].Split(' ');
                 if (lineDetails.Length > 1)
                 {
                     switch (lineDetails[1])
                     {
                         case "41F9": // LEA
+                        case "43FA": // LEA
                         case "43F9": // LEA
                         case "45F9": // LEA
                         case "4DF9": // LEA
@@ -79,7 +70,7 @@ namespace BinToAssembly
                             {
                                 branchLoc.Add(location, branch + branchCount++.ToString());
                             }
-                            passOne.Add(lineDetails[length - 1] + " " + lineDetails[length]);
+                            PassOned.Add(lineDetails[length - 1] + " " + lineDetails[length]);
                             break;
                         case "4EF9": // JMP
                         case "6000": // BRA
@@ -105,10 +96,10 @@ namespace BinToAssembly
                             {
                                 branchLoc.Add(location, branch + branchCount++.ToString());
                             }
-                            passOne.Add(lineDetails[length - 1] + " " + lineDetails[length]);
+                            PassOned.Add(lineDetails[length - 1] + " " + lineDetails[length]);
                             break;
                         case "4280": // CLR
-                            passOne.Add(lineDetails[21] + " " + lineDetails[22]);
+                            PassOned.Add(lineDetails[21] + " " + lineDetails[22]);
                             break;
                         //case "51C8": // DBF
                         //    //string[] locations = lineDetails[18].Split(',');
@@ -123,13 +114,13 @@ namespace BinToAssembly
                             // Add the DC.W's
                             if (dataWord != "")
                             {
-                                passOne.Add(dataWord);
+                                PassOned.Add(dataWord);
                                 dataWord = "";
                             }
                             else
                             {
                                 int indexLength = lineDetails.Length;
-                                passOne.Add(lineDetails[indexLength - 2] + " " + lineDetails[indexLength - 1]);
+                                PassOned.Add(lineDetails[indexLength - 2] + " " + lineDetails[indexLength - 1]);
                             }
                             break;
                     }
@@ -141,13 +132,16 @@ namespace BinToAssembly
             }
         }
 
+        /// <summary>
+        /// PassTwo
+        /// </summary>
         public void PassTwo()
         {
             // Add the labels to the front of the code
-            for (int i = 0; i < passOne.Count; i++)
+            for (int i = 0; i < PassOned.Count; i++)
             {
-                string currentRowFromPassOne = passOne[i];
-                string currentRowFromOriginalFileContent = textBox.Lines[i];
+                string currentRowFromPassOne = PassOned[i];
+                string currentRowFromOriginalFileContent = Code[i];
                 var splitCurrentRow = currentRowFromOriginalFileContent.Split(' ');
                 int length = splitCurrentRow.Length - 1;
                 string label = "                ";
@@ -198,6 +192,7 @@ namespace BinToAssembly
 
                         if (currentRowFromOriginalFileContent.Contains("BEQ"))
                         {
+                            // TODO !
                             var debug = true;
                         }
 
@@ -205,6 +200,7 @@ namespace BinToAssembly
                         {
                             int index = memoryLocation.IndexOf(",");
                             memoryLocation = memoryLocation.Substring(0, index);
+                            memoryLocation = memoryLocation.Replace("(PC)", "");
                         }
                         memoryLocation = ConvertToHexEight(memoryLocation);
                         if (memLocation.Key.Equals(memoryLocation))
@@ -226,7 +222,9 @@ namespace BinToAssembly
             }
         }
 
-
+        /// <summary>
+        /// Pass Three
+        /// </summary>
         public string[] PassThree()
         {
             if (found.Count != branchLoc.Count)
@@ -246,6 +244,5 @@ namespace BinToAssembly
 
             return passTwo.ToArray();
         }
-
     }
 }

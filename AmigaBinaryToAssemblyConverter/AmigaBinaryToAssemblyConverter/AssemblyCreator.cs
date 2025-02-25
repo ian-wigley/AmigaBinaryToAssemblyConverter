@@ -192,8 +192,8 @@ namespace BinToAssembly
 
                         if (currentRowFromOriginalFileContent.Contains("BEQ"))
                         {
-                            // TODO !
-                            var debug = true;
+                            // TODO ! Check if $ is required ...
+                            currentRowFromPassOne = currentRowFromPassOne.Replace(memoryLocation, memLocation.Value);
                         }
 
                         if (currentRowFromOriginalFileContent.Contains("LEA"))

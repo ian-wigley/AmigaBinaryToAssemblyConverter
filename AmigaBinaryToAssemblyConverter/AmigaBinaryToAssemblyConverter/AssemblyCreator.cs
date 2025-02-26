@@ -144,7 +144,7 @@ namespace BinToAssembly
                 string currentRowFromOriginalFileContent = Code[i];
                 var splitCurrentRow = currentRowFromOriginalFileContent.Split(' ');
                 int length = splitCurrentRow.Length - 1;
-                string label = "                ";
+                string spacing = "                ";
                 foreach (KeyValuePair<string, string> memLocation in branchLoc)
                 {
                     // If the current line number matches the memory loction, add a label
@@ -163,7 +163,7 @@ namespace BinToAssembly
                         //!currentRowFromOriginalFileContent.Contains("DBF")
                         )
                     {
-                        label = memLocation.Value + "         ";
+                        spacing = memLocation.Value + "         ";
                         found.Add(memLocation.Key);
                     }
                     else if (currentRowFromOriginalFileContent.Contains("BEQ") ||
@@ -188,12 +188,9 @@ namespace BinToAssembly
                         ////    var a = memoryLocation.IndexOf(",") + 1;
                         ////    memoryLocation = memoryLocation.Substring(a, 4);
                         ////}
-                        ///
-
                         if (currentRowFromOriginalFileContent.Contains("BEQ"))
                         {
-                            // TODO ! Check if $ is required ...
-                            currentRowFromPassOne = currentRowFromPassOne.Replace(memoryLocation, memLocation.Value);
+                             currentRowFromPassOne = currentRowFromPassOne.Replace("$" + memoryLocation, memLocation.Value);
                         }
 
                         if (currentRowFromOriginalFileContent.Contains("LEA"))
@@ -218,7 +215,7 @@ namespace BinToAssembly
                         }
                     }
                 }
-                passTwo.Add(label + currentRowFromPassOne);
+                passTwo.Add(spacing + currentRowFromPassOne);
             }
         }
 

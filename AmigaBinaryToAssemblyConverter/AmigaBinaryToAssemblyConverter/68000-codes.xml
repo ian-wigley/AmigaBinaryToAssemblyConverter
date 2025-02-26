@@ -708,7 +708,7 @@
 	<code>66¬CE¬BNE¬1¬$¬¬¬</code>
 	<code>66¬F2¬BNE¬1¬$¬¬¬</code>
 	<code>66¬F6¬BNE¬2¬¬¬¬</code>
-	<code>67¬00¬BEQ¬2¬¬¬¬</code>
+	<code>67¬00¬BEQ¬2¬$¬¬¬</code>
 	<code>67¬01¬BEQ¬1¬$¬¬¬</code>
 	<code>67¬0A¬BEQ¬1¬$¬¬¬</code>
 	<code>67¬61¬BEQ.B¬1¬$¬¬¬</code>

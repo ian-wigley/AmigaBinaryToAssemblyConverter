@@ -10,11 +10,11 @@ namespace BinToAssembly
     public class AssemblyCreator
     {
         public string[] Code { get; set; }
-        private readonly string branch = "BRANCH";
-        public List<string> PassOned { get; private set; } = new List<string>();
-        private readonly List<string> passTwo = new List<string>();
+        private readonly string label = "LABEL";
+        public List<string> PassOne { get; private set; } = new List<string>();
+        public List<string> PassTwo { get; private set; } = new List<string>();
         private readonly List<string> found = new List<string>();
-        private readonly Dictionary<string, string> branchLoc = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> labelLocation = new Dictionary<string, string>();
 
         /// <summary>
         /// Convert To Hex Eight
@@ -25,18 +25,17 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// PassOne
+        /// InitialPass
         /// </summary>
-        public void PassOne(
+        public void InitialPass(
             string start,
-            string end,
-            List<string> originalFileContent
+            string end
             )
         {
             bool firstPass = true;
             string dataWord = "";
             int count = 0;
-            int branchCount = 0;
+            int labelCount = 0;
 
             int userSelectedFileEnd = int.Parse(end, System.Globalization.NumberStyles.HexNumber);
             int originalFileLength = Code.Length;
@@ -44,7 +43,6 @@ namespace BinToAssembly
             // First pass parses the content looking for branch & jump conditions
             while (firstPass)
             {
-                // Split each line into an array
                 if (Code[count].Contains("DC.B"))
                 {
                     dataWord = Code[count];
@@ -52,6 +50,7 @@ namespace BinToAssembly
                     dataWord = dataWord.Substring(startLocation, dataWord.Length - startLocation);
                 }
 
+                // Split each line into an array
                 string[] lineDetails = Code[count++].Split(' ');
                 if (lineDetails.Length > 1)
                 {
@@ -61,16 +60,22 @@ namespace BinToAssembly
                         case "43FA": // LEA
                         case "43F9": // LEA
                         case "45F9": // LEA
+                        case "47F9": // LEA
                         case "4DF9": // LEA
                             int length = lineDetails.Length - 1;
                             string location = lineDetails[length].Replace("$", "");
                             int index = location.IndexOf(",");
                             location = location.Substring(0, index);
-                            if (!branchLoc.ContainsKey(location))
+                            location = location.Replace("(PC)", "");
+                            if (location.Length < 8)
                             {
-                                branchLoc.Add(location, branch + branchCount++.ToString());
+                                location = ConvertToHexEight(location);
                             }
-                            PassOned.Add(lineDetails[length - 1] + " " + lineDetails[length]);
+                            if (!labelLocation.ContainsKey(location))
+                            {
+                                labelLocation.Add(location, label + labelCount++.ToString());
+                            }
+                            PassOne.Add(lineDetails[length - 1] + " " + lineDetails[length]);
                             break;
                         case "4EF9": // JMP
                         case "6000": // BRA
@@ -92,14 +97,14 @@ namespace BinToAssembly
                             location = lineDetails[length].Replace("$", "");
                             location = location.Replace("#", "").ToUpper();
                             location = ConvertToHexEight(location);
-                            if (!branchLoc.ContainsKey(location))
+                            if (!labelLocation.ContainsKey(location))
                             {
-                                branchLoc.Add(location, branch + branchCount++.ToString());
+                                labelLocation.Add(location, label + labelCount++.ToString());
                             }
-                            PassOned.Add(lineDetails[length - 1] + " " + lineDetails[length]);
+                            PassOne.Add(lineDetails[length - 1] + " " + lineDetails[length]);
                             break;
                         case "4280": // CLR
-                            PassOned.Add(lineDetails[21] + " " + lineDetails[22]);
+                            PassOne.Add(lineDetails[21] + " " + lineDetails[22]);
                             break;
                         //case "51C8": // DBF
                         //    //string[] locations = lineDetails[18].Split(',');
@@ -114,18 +119,18 @@ namespace BinToAssembly
                             // Add the DC.W's
                             if (dataWord != "")
                             {
-                                PassOned.Add(dataWord);
+                                PassOne.Add(dataWord);
                                 dataWord = "";
                             }
                             else
                             {
                                 int indexLength = lineDetails.Length;
-                                PassOned.Add(lineDetails[indexLength - 2] + " " + lineDetails[indexLength - 1]);
+                                PassOne.Add(lineDetails[indexLength - 2] + " " + lineDetails[indexLength - 1]);
                             }
                             break;
                     }
                 }
-                if (count >= userSelectedFileEnd || count >= originalFileLength || lineDetails[0].ToLower().Contains(end.ToLower()))
+                if (count >= userSelectedFileEnd || count >= originalFileLength || lineDetails[0].ToUpper().Equals(end.ToUpper()))
                 {
                     firstPass = false;
                 }
@@ -133,19 +138,19 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// PassTwo
+        /// SecondPass
         /// </summary>
-        public void PassTwo()
+        public void SecondPass()
         {
             // Add the labels to the front of the code
-            for (int i = 0; i < PassOned.Count; i++)
+            for (int i = 0; i < PassOne.Count; i++)
             {
-                string currentRowFromPassOne = PassOned[i];
+                string currentRowFromPassOne = PassOne[i];
                 string currentRowFromOriginalFileContent = Code[i];
                 var splitCurrentRow = currentRowFromOriginalFileContent.Split(' ');
                 int length = splitCurrentRow.Length - 1;
                 string spacing = "                ";
-                foreach (KeyValuePair<string, string> memLocation in branchLoc)
+                foreach (KeyValuePair<string, string> memLocation in labelLocation)
                 {
                     // If the current line number matches the memory loction, add a label
                     if (splitCurrentRow[0].ToUpper().Contains(memLocation.Key.ToUpper()) &&
@@ -190,7 +195,7 @@ namespace BinToAssembly
                         ////}
                         if (currentRowFromOriginalFileContent.Contains("BEQ"))
                         {
-                             currentRowFromPassOne = currentRowFromPassOne.Replace("$" + memoryLocation, memLocation.Value);
+                            currentRowFromPassOne = currentRowFromPassOne.Replace("$" + memoryLocation, memLocation.Value);
                         }
 
                         if (currentRowFromOriginalFileContent.Contains("LEA"))
@@ -215,31 +220,31 @@ namespace BinToAssembly
                         }
                     }
                 }
-                passTwo.Add(spacing + currentRowFromPassOne);
+                PassTwo.Add(spacing + currentRowFromPassOne);
             }
         }
 
         /// <summary>
-        /// Pass Three
+        /// FinalPass
         /// </summary>
-        public string[] PassThree()
+        public string[] FinalPass()
         {
-            if (found.Count != branchLoc.Count)
+            if (found.Count != labelLocation.Count)
             {
-                passTwo.Add("\n; ---------------------------------------------------------");
-                passTwo.Add("; The memory locations below were not found within the file\n");
+                PassTwo.Add("\n; ---------------------------------------------------------");
+                PassTwo.Add("; The memory locations below were not found within the file\n");
             }
 
             // Finally iterate through the found list & add references to the address not found
-            foreach (KeyValuePair<string, string> memLocation in branchLoc)
+            foreach (KeyValuePair<string, string> memLocation in labelLocation)
             {
                 if (!found.Contains(memLocation.Key))
                 {
-                    passTwo.Add(memLocation.Value + "; @: " + memLocation.Key);
+                    PassTwo.Add(memLocation.Value + "; @: " + memLocation.Key);
                 }
             }
 
-            return passTwo.ToArray();
+            return PassTwo.ToArray();
         }
     }
 }

@@ -7,3 +7,4 @@ AmigaBinaryToAssemblyConverter/packages/MSTest.TestAdapter.2.1.2/build
 AmigaBinaryToAssemblyConverter/packages/MSTest.TestFramework.2.1.2/lib
 AmigaBinaryToAssemblyConverter/AmigaBinaryToAssemblyConverterTests/bin
 AmigaBinaryToAssemblyConverter/packages
+/AmigaBinaryToAssemblyConverter/Utils/AmigaOpCodeCompare/.idea

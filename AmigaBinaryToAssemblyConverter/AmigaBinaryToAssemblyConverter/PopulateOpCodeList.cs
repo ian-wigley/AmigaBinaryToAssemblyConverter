@@ -20,15 +20,14 @@ namespace BinToAssembly
             xmlLoader.LoadOpCodes(m_OpCodes);
         }
 
+        public dynamic GetOpCode(string one, string two)
+        {
+            return m_OpCodes.FirstOrDefault(opCode => opCode.m_codeOne.Equals(one) && opCode.m_codeTwo.Equals(two));
+        }
+
         //public dynamic GetOpCode(string value)
         //{
         //    return m_OpCodes.FirstOrDefault(opCode => opCode.Code.Equals(value));
         //}
-
-        public dynamic GetOpCode(string t, string tt)
-        {
-            return m_OpCodes.FirstOrDefault(opCode => opCode.m_codeOne.Equals(t) && opCode.m_codeTwo.Equals(tt));
-
-        }
     }
 }

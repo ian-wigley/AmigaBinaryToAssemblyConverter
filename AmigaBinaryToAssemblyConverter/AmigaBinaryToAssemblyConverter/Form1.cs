@@ -90,9 +90,9 @@ namespace BinToAssembly
             ClearRightWindow();
             assemblyCreator.Code = textBox1.Lines;
             AssemblyView.Font = new Font(FontFamily.GenericMonospace, AssemblyView.Font.Size);
-            assemblyCreator.PassOne(start, end, code);
-            assemblyCreator.PassTwo();
-            AssemblyView.Lines = assemblyCreator.PassThree();
+            assemblyCreator.InitialPass(start, end);
+            assemblyCreator.SecondPass();
+            AssemblyView.Lines = assemblyCreator.FinalPass();
             rightWindowToolStripMenuItem.Enabled = true;
         }
 

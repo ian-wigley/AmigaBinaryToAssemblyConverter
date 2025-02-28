@@ -62,20 +62,7 @@ namespace BinToAssembly
                         case "45F9": // LEA
                         case "47F9": // LEA
                         case "4DF9": // LEA
-                            int length = lineDetails.Length - 1;
-                            string location = lineDetails[length].Replace("$", "");
-                            int index = location.IndexOf(",");
-                            location = location.Substring(0, index);
-                            location = location.Replace("(PC)", "");
-                            if (location.Length < 8)
-                            {
-                                location = ConvertToHexEight(location);
-                            }
-                            if (!labelLocation.ContainsKey(location))
-                            {
-                                labelLocation.Add(location, label + labelCount++.ToString());
-                            }
-                            PassOne.Add(lineDetails[length - 1] + " " + lineDetails[length]);
+                            ExtractLEAinformation(ref labelCount, lineDetails);
                             break;
                         case "4EF9": // JMP
                         case "6000": // BRA
@@ -93,15 +80,7 @@ namespace BinToAssembly
                         case "6D01": // BLT
                         case "6D6F": // BLT
                         case "6F01": // BLE
-                            length = lineDetails.Length - 1;
-                            location = lineDetails[length].Replace("$", "");
-                            location = location.Replace("#", "").ToUpper();
-                            location = ConvertToHexEight(location);
-                            if (!labelLocation.ContainsKey(location))
-                            {
-                                labelLocation.Add(location, label + labelCount++.ToString());
-                            }
-                            PassOne.Add(lineDetails[length - 1] + " " + lineDetails[length]);
+                            ExtractBranchInformation(ref labelCount, lineDetails);
                             break;
                         case "4280": // CLR
                             PassOne.Add(lineDetails[21] + " " + lineDetails[22]);
@@ -142,6 +121,12 @@ namespace BinToAssembly
         /// </summary>
         public void SecondPass()
         {
+            if (PassOne.Count != Code.Length)
+            {
+                MessageBox.Show("Mismatch in data lengths");
+                return;
+            }
+
             // Add the labels to the front of the code
             for (int i = 0; i < PassOne.Count; i++)
             {
@@ -246,5 +231,43 @@ namespace BinToAssembly
 
             return PassTwo.ToArray();
         }
+
+        /// <summary>
+        /// ExtractBranchInformation
+        /// </summary>
+        private void ExtractBranchInformation(ref int labelCount, string[] lineDetails)
+        {
+            int length = lineDetails.Length - 1;
+            string location = lineDetails[length].Replace("$", "");
+            location = location.Replace("#", "").ToUpper();
+            location = ConvertToHexEight(location);
+            if (!labelLocation.ContainsKey(location))
+            {
+                labelLocation.Add(location, label + labelCount++.ToString());
+            }
+            PassOne.Add(lineDetails[length - 1] + " " + lineDetails[length]);
+        }
+
+        /// <summary>
+        /// ExtractLEAinformation
+        /// </summary>
+        private void ExtractLEAinformation(ref int labelCount, string[] lineDetails)
+        {
+            int length = lineDetails.Length - 1;
+            string location = lineDetails[length].Replace("$", "");
+            int index = location.IndexOf(",");
+            location = location.Substring(0, index);
+            location = location.Replace("(PC)", "");
+            if (location.Length < 8)
+            {
+                location = ConvertToHexEight(location);
+            }
+            if (!labelLocation.ContainsKey(location))
+            {
+                labelLocation.Add(location, label + labelCount++.ToString());
+            }
+            PassOne.Add(lineDetails[length - 1] + " " + lineDetails[length]);
+        }
+
     }
 }

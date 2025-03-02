@@ -1,27 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace BinToAssembly
 {
     public class AssemblyCreator
     {
-        public string[] Code { get; set; }
         private readonly string label = "LABEL";
+
+        public string[] Code { get; set; }
         public List<string> PassOne { get; private set; } = new List<string>();
         public List<string> PassTwo { get; private set; } = new List<string>();
-        private readonly List<string> found = new List<string>();
-        private readonly Dictionary<string, string> labelLocation = new Dictionary<string, string>();
+        public List<string> Found { get; private set; } = new List<string>();
+        public Dictionary<string, string> LabelLocation { get; private set; } = new Dictionary<string, string>();
 
         /// <summary>
         /// Convert To Hex Eight
         /// </summary>
         private string ConvertToHexEight(string value)
         {
-            return int.Parse(value, System.Globalization.NumberStyles.HexNumber).ToString("X8");
+            if (!value.Contains("-"))
+            {
+                return int.Parse(value, System.Globalization.NumberStyles.HexNumber).ToString("X8");
+            }
+            return value;
         }
 
         /// <summary>
@@ -64,6 +65,7 @@ namespace BinToAssembly
                         case "4DF9": // LEA
                             ExtractLEAinformation(ref labelCount, lineDetails);
                             break;
+                        case "4EB9": // JSR
                         case "4EF9": // JMP
                         case "6000": // BRA
                         case "60EC": // BRA
@@ -135,7 +137,7 @@ namespace BinToAssembly
                 var splitCurrentRow = currentRowFromOriginalFileContent.Split(' ');
                 int length = splitCurrentRow.Length - 1;
                 string spacing = "                ";
-                foreach (KeyValuePair<string, string> memLocation in labelLocation)
+                foreach (KeyValuePair<string, string> memLocation in LabelLocation)
                 {
                     // If the current line number matches the memory loction, add a label
                     if (splitCurrentRow[0].ToUpper().Contains(memLocation.Key.ToUpper()) &&
@@ -149,12 +151,13 @@ namespace BinToAssembly
                         !currentRowFromOriginalFileContent.Contains("BLE") &&
                         !currentRowFromOriginalFileContent.Contains("BMI") &&
                         !currentRowFromOriginalFileContent.Contains("JMP") &&
+                        !currentRowFromOriginalFileContent.Contains("JSR") &&
                         !currentRowFromOriginalFileContent.Contains("LEA")
                         //!currentRowFromOriginalFileContent.Contains("DBF")
                         )
                     {
                         spacing = memLocation.Value + "         ";
-                        found.Add(memLocation.Key);
+                        Found.Add(memLocation.Key);
                     }
                     else if (currentRowFromOriginalFileContent.Contains("BEQ") ||
                         currentRowFromOriginalFileContent.Contains("BNE") ||
@@ -166,6 +169,7 @@ namespace BinToAssembly
                         currentRowFromOriginalFileContent.Contains("BLE") ||
                         currentRowFromOriginalFileContent.Contains("BMI") ||
                         currentRowFromOriginalFileContent.Contains("JMP") ||
+                        currentRowFromOriginalFileContent.Contains("JSR") ||
                         currentRowFromOriginalFileContent.Contains("LEA")
                         //currentRowFromOriginalFileContent.Contains("DBF")
                         )
@@ -214,16 +218,16 @@ namespace BinToAssembly
         /// </summary>
         public string[] FinalPass()
         {
-            if (found.Count != labelLocation.Count)
+            if (Found.Count != LabelLocation.Count)
             {
                 PassTwo.Add("\n; ---------------------------------------------------------");
                 PassTwo.Add("; The memory locations below were not found within the file\n");
             }
 
             // Finally iterate through the found list & add references to the address not found
-            foreach (KeyValuePair<string, string> memLocation in labelLocation)
+            foreach (KeyValuePair<string, string> memLocation in LabelLocation)
             {
-                if (!found.Contains(memLocation.Key))
+                if (!Found.Contains(memLocation.Key))
                 {
                     PassTwo.Add(memLocation.Value + "; @: " + memLocation.Key);
                 }
@@ -241,9 +245,9 @@ namespace BinToAssembly
             string location = lineDetails[length].Replace("$", "");
             location = location.Replace("#", "").ToUpper();
             location = ConvertToHexEight(location);
-            if (!labelLocation.ContainsKey(location))
+            if (!LabelLocation.ContainsKey(location))
             {
-                labelLocation.Add(location, label + labelCount++.ToString());
+                LabelLocation.Add(location, label + labelCount++.ToString());
             }
             PassOne.Add(lineDetails[length - 1] + " " + lineDetails[length]);
         }
@@ -262,9 +266,9 @@ namespace BinToAssembly
             {
                 location = ConvertToHexEight(location);
             }
-            if (!labelLocation.ContainsKey(location))
+            if (!LabelLocation.ContainsKey(location))
             {
-                labelLocation.Add(location, label + labelCount++.ToString());
+                LabelLocation.Add(location, label + labelCount++.ToString());
             }
             PassOne.Add(lineDetails[length - 1] + " " + lineDetails[length]);
         }

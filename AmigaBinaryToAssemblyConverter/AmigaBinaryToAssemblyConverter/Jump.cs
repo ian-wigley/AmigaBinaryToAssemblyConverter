@@ -74,7 +74,7 @@ namespace BinToAssembly
                 elementOne = GetTwoShorts(ref filePosition, binaryFileData);
                 var amount = Convert.ToInt16(elementOne, 16);
                 binOne = elementOne;
-                elementOne = amount.ToString().ToUpper();
+                elementOne = amount.ToString("x4").ToUpper();
                 elementTwo = GetTwoShorts(ref filePosition, binaryFileData);
             }
 

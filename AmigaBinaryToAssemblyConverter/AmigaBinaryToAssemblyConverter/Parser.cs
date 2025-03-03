@@ -10,8 +10,6 @@ namespace BinToAssembly
     public class Parser
     {
         private readonly int startAddress = 0;
-        private Dictionary<string, string[]> dataStatements = new Dictionary<string, string[]>();
-
         private readonly string graphicsLibrary = "graphics.library";
 
         /// <summary>
@@ -79,7 +77,7 @@ namespace BinToAssembly
 
                 if (oc != null)
                 {
-                    ConvertToAssembly(oc, ref line, ref filePosition, data, lineNumber, pc, ref dataStatements);
+                    ConvertToAssembly(oc, ref line, ref filePosition, data);
                     found = true;
                 }
 
@@ -120,11 +118,8 @@ namespace BinToAssembly
             dynamic oc,
             ref string line,
             ref int filePosition,
-            byte[] binaryFileData,
-            int? lineNumber,
-            int pc,
-            ref Dictionary<string, string[]> dataStatements
-            )
+            byte[] binaryFileData
+        )
         {
             switch (oc.Code)
             {

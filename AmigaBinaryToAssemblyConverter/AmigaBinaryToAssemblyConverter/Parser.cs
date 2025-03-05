@@ -1013,7 +1013,6 @@ namespace BinToAssembly
                 case "FFE1":
                 case "FFEE":
                 case "FFFE":
-
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "4EB9":  // JSR

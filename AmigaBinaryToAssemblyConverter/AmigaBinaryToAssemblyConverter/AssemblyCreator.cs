@@ -196,7 +196,9 @@ namespace BinToAssembly
                         memoryLocation = ConvertToHexEight(memoryLocation);
                         if (memLocation.Key.Equals(memoryLocation))
                         {
-                            if (!currentRowFromPassOne.Contains("LEA"))
+                            if (!currentRowFromPassOne.Contains("LEA") && 
+                                !currentRowFromPassOne.Contains("JSR") &&
+                                !currentRowFromPassOne.Contains("JMP"))
                             {
                                 currentRowFromPassOne = currentRowFromPassOne.Replace("$" + memoryLocation.Substring(4, 4), memLocation.Value);
                             }
@@ -204,8 +206,6 @@ namespace BinToAssembly
                             {
                                 currentRowFromPassOne = currentRowFromPassOne.Replace("$" + memoryLocation, memLocation.Value);
                             }
-                            //var currentRowSplit = currentRowFromPassOne.Split(' ');
-                            //currentRowFromPassOne = currentRowSplit[0] + " " + memLocation.Value;
                         }
                     }
                 }

@@ -4,10 +4,9 @@ using System.Xml;
 
 namespace BinToAssembly
 {
-    public class XMLLoader
+    public class XmlLoader
     {
-        private bool valid = false;
-        public bool SetValid { set { valid = value; } }
+        public bool Valid { set; get; }
         public SettingsCache SettingsCache { private set; get; }
 
         public void LoadSettings()
@@ -42,6 +41,9 @@ namespace BinToAssembly
             }
         }
 
+        /// <summary>
+        /// Load Op Codes
+        /// </summary>
         public void LoadOpCodes(List<BaseOpCode> m_OpCodes)
         {
             string processor = "68000";
@@ -56,7 +58,7 @@ namespace BinToAssembly
                         break;
                     // Display the text in each element.
                     case XmlNodeType.Text:
-                        if (valid)
+                        if (Valid)
                         {
                             // Split the line using the delimiter
                             string[] split = reader.Value.Split('¬');
@@ -78,12 +80,11 @@ namespace BinToAssembly
                             {
                                 m_OpCodes.Add(new OpCode(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
                             }
-
                         }
 
                         if (reader.Value.Equals(processor))
                         {
-                            valid = true;
+                            Valid = true;
                         }
 
                         break;
@@ -93,6 +94,9 @@ namespace BinToAssembly
             }
         }
 
+        /// <summary>
+        /// Get Data Type
+        /// </summary>
         private void GetDataType(string data, out string dataSize)
         {
             if (data.Contains("."))
@@ -102,6 +106,5 @@ namespace BinToAssembly
             }
             else { dataSize = "?"; }
         }
-
     }
 }

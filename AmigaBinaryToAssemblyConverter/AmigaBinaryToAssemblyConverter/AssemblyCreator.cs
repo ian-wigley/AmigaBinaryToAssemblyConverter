@@ -6,7 +6,6 @@ namespace BinToAssembly
     public class AssemblyCreator
     {
         private readonly string label = "LABEL";
-
         public string[] Code { get; set; }
         public List<string> PassOne { get; private set; } = new List<string>();
         public List<string> PassTwo { get; private set; } = new List<string>();
@@ -26,12 +25,11 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// InitialPass
+        /// Initial Pass
         /// </summary>
         public void InitialPass(
             string start,
-            string end
-            )
+            string end)
         {
             bool firstPass = true;
             string dataWord = "";
@@ -119,7 +117,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// SecondPass
+        /// Second Pass
         /// </summary>
         public void SecondPass()
         {
@@ -184,9 +182,8 @@ namespace BinToAssembly
                         ////}
                         if (currentRowFromOriginalFileContent.Contains("BEQ"))
                         {
-                            currentRowFromPassOne = currentRowFromPassOne.Replace("$" + memoryLocation, memLocation.Value);
+                            currentRowFromPassOne = UpdateRow(currentRowFromPassOne, memLocation, memoryLocation);
                         }
-
                         if (currentRowFromOriginalFileContent.Contains("LEA"))
                         {
                             int index = memoryLocation.IndexOf(",");
@@ -204,7 +201,7 @@ namespace BinToAssembly
                             }
                             else
                             {
-                                currentRowFromPassOne = currentRowFromPassOne.Replace("$" + memoryLocation, memLocation.Value);
+                                currentRowFromPassOne = UpdateRow(currentRowFromPassOne, memLocation, memoryLocation);
                             }
                         }
                     }
@@ -214,7 +211,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// FinalPass
+        /// Final Pass
         /// </summary>
         public string[] FinalPass()
         {
@@ -232,12 +229,19 @@ namespace BinToAssembly
                     PassTwo.Add(memLocation.Value + "; @: " + memLocation.Key);
                 }
             }
-
             return PassTwo.ToArray();
         }
 
         /// <summary>
-        /// ExtractBranchInformation
+        /// Update Row
+        /// </summary>
+        public string UpdateRow(string currentRowFromPassOne, KeyValuePair<string, string> memLocation, string memoryLocation)
+        {
+            return currentRowFromPassOne.Replace("$" + memoryLocation, memLocation.Value);
+        }
+
+        /// <summary>
+        /// Extract Branch Information
         /// </summary>
         private void ExtractBranchInformation(ref int labelCount, string[] lineDetails)
         {
@@ -253,7 +257,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// ExtractLEAinformation
+        /// Extract LEA information
         /// </summary>
         private void ExtractLEAinformation(ref int labelCount, string[] lineDetails)
         {
@@ -272,6 +276,5 @@ namespace BinToAssembly
             }
             PassOne.Add(lineDetails[length - 1] + " " + lineDetails[length]);
         }
-
     }
 }

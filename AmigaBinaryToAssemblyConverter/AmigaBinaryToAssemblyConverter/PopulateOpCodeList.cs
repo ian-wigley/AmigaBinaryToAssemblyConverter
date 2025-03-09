@@ -7,15 +7,15 @@ namespace BinToAssembly
     {
         private readonly List<BaseOpCode> m_OpCodes = new List<BaseOpCode>();
         public List<BaseOpCode> GetOpCodes { get { return m_OpCodes; } }
-        private readonly XMLLoader xmlLoader = new XMLLoader();
-        public XMLLoader GetXMLLoader { get { return xmlLoader; } }
+        private readonly XmlLoader xmlLoader = new XmlLoader();
+        public XmlLoader GetXMLLoader { get { return xmlLoader; } }
         private string processor = "";
         public string GetProcessor { get { return processor; } }
 
         public void Init()
         {
             m_OpCodes.Clear();
-            xmlLoader.SetValid = false;
+            xmlLoader.Valid = false;
             xmlLoader.LoadSettings();
             xmlLoader.LoadOpCodes(m_OpCodes);
         }

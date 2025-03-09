@@ -81,7 +81,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsCache.cs" />
-    <Compile Include="XMLLoader.cs" />
+    <Compile Include="XmlLoader.cs" />
     <EmbeddedResource Include="ConfigureSettings.resx">
       <DependentUpon>ConfigureSettings.cs</DependentUpon>
     </EmbeddedResource>

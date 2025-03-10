@@ -22,7 +22,7 @@ namespace BinToAssembly
 
         public dynamic GetOpCode(string one, string two)
         {
-            return m_OpCodes.FirstOrDefault(opCode => opCode.m_codeOne.Equals(one) && opCode.m_codeTwo.Equals(two));
+            return m_OpCodes.Find(opCode => opCode.m_codeOne.Equals(one) && opCode.m_codeTwo.Equals(two));
         }
 
         //public dynamic GetOpCode(string value)

@@ -174,12 +174,12 @@ namespace BinToAssembly
                     {
                         var memoryLocation = splitCurrentRow[length].Replace("#", "");
                         memoryLocation = memoryLocation.Replace("$", "").ToUpper();
-                        ////if (currentRowFromOriginalFileContent.Contains("DBF"))
-                        ////{
-                        ////    var debug = true;
-                        ////    var a = memoryLocation.IndexOf(",") + 1;
-                        ////    memoryLocation = memoryLocation.Substring(a, 4);
-                        ////}
+
+                        //if (currentRowFromOriginalFileContent.Contains("DBF"))
+                        //{
+                        //    var a = memoryLocation.IndexOf(",") + 1;
+                        //    memoryLocation = memoryLocation.Substring(a, 4);
+                        //}
                         if (currentRowFromOriginalFileContent.Contains("BEQ"))
                         {
                             currentRowFromPassOne = UpdateRow(currentRowFromPassOne, memLocation, memoryLocation);

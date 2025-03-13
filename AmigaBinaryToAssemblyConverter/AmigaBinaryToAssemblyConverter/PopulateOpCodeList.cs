@@ -24,10 +24,5 @@ namespace BinToAssembly
         {
             return m_OpCodes.Find(opCode => opCode.m_codeOne.Equals(one) && opCode.m_codeTwo.Equals(two));
         }
-
-        //public dynamic GetOpCode(string value)
-        //{
-        //    return m_OpCodes.FirstOrDefault(opCode => opCode.Code.Equals(value));
-        //}
     }
 }

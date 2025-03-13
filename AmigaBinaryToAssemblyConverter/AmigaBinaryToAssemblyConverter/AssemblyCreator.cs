@@ -193,7 +193,7 @@ namespace BinToAssembly
                         memoryLocation = ConvertToHexEight(memoryLocation);
                         if (memLocation.Key.Equals(memoryLocation))
                         {
-                            if (!currentRowFromPassOne.Contains("LEA") && 
+                            if (!currentRowFromPassOne.Contains("LEA") &&
                                 !currentRowFromPassOne.Contains("JSR") &&
                                 !currentRowFromPassOne.Contains("JMP"))
                             {

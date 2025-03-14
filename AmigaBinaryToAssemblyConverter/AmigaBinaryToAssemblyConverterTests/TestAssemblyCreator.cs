@@ -19,8 +19,8 @@ namespace MultiBinaryToAssemblyConverterTests
         {
             AssemblyCreator assemblyCreator = new AssemblyCreator
             {
-                Code = new[] { 
-                    "00000000 2C78 0004               MOVEA.L $0004.W,A6", 
+                Code = new[] {
+                    "00000000 2C78 0004               MOVEA.L $0004.W,A6",
                     "00000004 43FA 007E               LEA $007E(PC),A1" }
             };
             Assert.AreEqual(2, assemblyCreator.Code.Length);
@@ -72,6 +72,11 @@ namespace MultiBinaryToAssemblyConverterTests
             Assert.IsTrue(assemblyCreator.LabelLocation.ContainsKey(locationTwo));
             assemblyCreator.SecondPass();
             Assert.AreEqual(assemblyCreator.Code.Length, assemblyCreator.PassOne.Count);
+        }
+
+        [TestMethod]
+        public void TestAssemblyCreatorClassPassTwoHasDBF()
+        {
         }
     }
 }

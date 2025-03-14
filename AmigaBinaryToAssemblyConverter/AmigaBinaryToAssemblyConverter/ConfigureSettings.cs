@@ -12,7 +12,7 @@ namespace BinToAssembly
             Kickhunk.Text = sc.Kickhunk;
             Fhunk.Text = sc.Fhunk;
             Flag.Text = sc.Flag;
-            Destination.Text = sc.Destination;
+            Destination.Text = sc.Folder;
         }
 
         private void CloseTheSettings(object sender, System.EventArgs e)

@@ -296,7 +296,7 @@ namespace BinToAssembly
             string tempFile =  Path.GetRandomFileName();
 
             // Convert the lines of Text to a byte array
-            byte[] dataAsBytes = AssemblyView.Lines.SelectMany(s => System.Text.Encoding.UTF8.GetBytes(s + Environment.NewLine)).ToArray();
+            byte[] dataAsBytes = AssemblyView.Lines.SelectMany(s => Encoding.UTF8.GetBytes(s + Environment.NewLine)).ToArray();
 
             // Open a FileStream to write to the file:
             using (Stream fileStream = File.OpenWrite(tempFile))
@@ -307,28 +307,39 @@ namespace BinToAssembly
             tempFile = tempFile.Replace("\\", "/");
 
             var sc = populateOpCodeList.GetXMLLoader.SettingsCache;
-            string args = "/C " + sc.VasmLocation +
-                " " + sc.Processor +
-                " " + sc.Kickhunk +
-                " " + sc.Fhunk +
-                " " + sc.Flag +
-                " " + sc.Destination +
-                " " + tempFile;
 
-            Process p = new Process();
-            p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.Arguments = args;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.CreateNoWindow = true;
-            p.Start();
+            if (!Directory.Exists(sc.Folder)) {
+                Directory.CreateDirectory(sc.Folder);
+            }
 
-            CompilerTextBox.Text += p.StandardOutput.ReadToEnd();
-            CompilerTextBox.Text += p.StandardError.ReadToEnd();
+            try
+            {
+                string args = "/C " + sc.VasmLocation +
+                    " " + sc.Processor +
+                    " " + sc.Kickhunk +
+                    " " + sc.Fhunk +
+                    " " + sc.Flag +
+                    " " + sc.Folder + sc.Filename +
+                    " " + tempFile;
 
-            // Delete the temp file
-            File.Delete(tempFile);
+                Process p = new Process();
+                p.StartInfo.FileName = "cmd.exe";
+                p.StartInfo.Arguments = args;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.RedirectStandardError = true;
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.CreateNoWindow = true;
+                p.Start();
+
+                CompilerTextBox.Text += p.StandardOutput.ReadToEnd();
+                CompilerTextBox.Text += p.StandardError.ReadToEnd();
+            }
+            catch (Exception ex) { }
+            finally
+            {
+                // Delete the temp file
+                File.Delete(tempFile);
+            }
         }
 
         /// <summary>

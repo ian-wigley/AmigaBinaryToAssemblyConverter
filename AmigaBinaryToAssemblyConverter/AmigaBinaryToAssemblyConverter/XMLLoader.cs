@@ -16,7 +16,8 @@ namespace BinToAssembly
             string kickhunk = "";
             string fhunk = "";
             string flag = "";
-            string destination = "";
+            string folder = "";
+            string filename = "";
 
             string settingsXML = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()) + "/" + "config.xml";
             XmlTextReader reader = new XmlTextReader(settingsXML);
@@ -29,14 +30,15 @@ namespace BinToAssembly
                 kickhunk = reader.GetAttribute("kickhunk");
                 fhunk = reader.GetAttribute("fhunk");
                 flag = reader.GetAttribute("flag");
-                destination = reader.GetAttribute("destination");
+                folder = reader.GetAttribute("folder");
+                filename = reader.GetAttribute("filename");
             }
             finally
             {
                 if (reader != null)
                 {
                     reader.Close();
-                    SettingsCache = new SettingsCache(vasmLocation, processors, kickhunk, fhunk, flag, destination);
+                    SettingsCache = new SettingsCache(vasmLocation, processors, kickhunk, fhunk, flag, folder, filename);
                 }
             }
         }

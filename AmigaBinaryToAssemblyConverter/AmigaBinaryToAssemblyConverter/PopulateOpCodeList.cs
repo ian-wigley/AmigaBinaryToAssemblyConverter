@@ -9,8 +9,8 @@ namespace BinToAssembly
         public List<BaseOpCode> GetOpCodes { get { return m_OpCodes; } }
         private readonly XmlLoader xmlLoader = new XmlLoader();
         public XmlLoader GetXMLLoader { get { return xmlLoader; } }
-        private string processor = "";
-        public string GetProcessor { get { return processor; } }
+        //private string processor = "";
+        //public string GetProcessor { get { return processor; } }
 
         public void Init()
         {

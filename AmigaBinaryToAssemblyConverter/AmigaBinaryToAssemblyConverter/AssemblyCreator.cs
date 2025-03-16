@@ -85,15 +85,15 @@ namespace BinToAssembly
                         case "4280": // CLR
                             PassOne.Add(lineDetails[21] + " " + lineDetails[22]);
                             break;
-                        case "51C8": // DBF
-                           //string[] locations = lineDetails[18].Split(',');
-                           //var temp = locations[1].Replace("$", "").ToUpper();
-                           //temp = ConvertToHexEight(temp);
-                           //if (!branchLoc.ContainsKey(temp))
-                           //{
-                           //    branchLoc.Add(temp, branch + branchCount++.ToString());
-                           //}
-                           break;
+                        //case "51C8": // DBF
+                        //   //string[] locations = lineDetails[18].Split(',');
+                        //   //var temp = locations[1].Replace("$", "").ToUpper();
+                        //   //temp = ConvertToHexEight(temp);
+                        //   //if (!branchLoc.ContainsKey(temp))
+                        //   //{
+                        //   //    branchLoc.Add(temp, branch + branchCount++.ToString());
+                        //   //}
+                        //   break;
                         default:
                             // Add the DC.W's
                             if (dataWord != "")
@@ -175,11 +175,11 @@ namespace BinToAssembly
                         var memoryLocation = splitCurrentRow[length].Replace("#", "");
                         memoryLocation = memoryLocation.Replace("$", "").ToUpper();
 
-                        if (currentRowFromOriginalFileContent.Contains("DBF"))
-                        {
-                            //var a = memoryLocation.IndexOf(",") + 1;
-                            //memoryLocation = memoryLocation.Substring(a, 4);
-                        }
+                        //if (currentRowFromOriginalFileContent.Contains("DBF"))
+                        //{
+                        //    //var a = memoryLocation.IndexOf(",") + 1;
+                        //    //memoryLocation = memoryLocation.Substring(a, 4);
+                        //}
                         if (currentRowFromOriginalFileContent.Contains("BEQ"))
                         {
                             currentRowFromPassOne = UpdateRow(currentRowFromPassOne, memLocation, memoryLocation);

@@ -37,6 +37,15 @@
 
             filePosition += 2;
 
+            if (NumberOfBytes == 1)
+            {
+                if (m_code == "7665")
+                {
+                    var debug = true;
+                    //elementOne = m_codeTwo;
+                }
+            }
+
             if (NumberOfBytes == 2)
             {
                 elementOne = GetTwoShorts(ref filePosition, binaryFileData);

@@ -77,6 +77,13 @@ namespace MultiBinaryToAssemblyConverterTests
         [TestMethod]
         public void TestAssemblyCreatorClassPassTwoHasDBF()
         {
+            AssemblyCreator assemblyCreator = new AssemblyCreator
+            {
+                Code = new[] { "000000FC 51C8 FFEA               DBF D0,$FFEA" }
+            };
+            assemblyCreator.InitialPass("000000FC", "000000FE");
+            assemblyCreator.SecondPass();
+            Assert.AreEqual(assemblyCreator.Code.Length, assemblyCreator.PassOne.Count);
         }
     }
 }

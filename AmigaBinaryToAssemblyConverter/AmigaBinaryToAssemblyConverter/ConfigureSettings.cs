@@ -13,6 +13,7 @@ namespace BinToAssembly
             Fhunk.Text = sc.Fhunk;
             Flag.Text = sc.Flag;
             Destination.Text = sc.Folder;
+            FileName.Text = sc.Folder;
         }
 
         private void CloseTheSettings(object sender, System.EventArgs e)

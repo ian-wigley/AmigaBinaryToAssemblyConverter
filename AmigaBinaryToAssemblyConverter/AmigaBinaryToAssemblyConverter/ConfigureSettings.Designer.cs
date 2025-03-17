@@ -35,7 +35,7 @@ namespace BinToAssembly
             this.Kickhunk = new System.Windows.Forms.Label();
             this.Fhunk = new System.Windows.Forms.Label();
             this.Flag = new System.Windows.Forms.Label();
-            this.Destination = new System.Windows.Forms.Label();
+            this.Folder = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -105,12 +105,12 @@ namespace BinToAssembly
             // 
             // Destination
             // 
-            this.Destination.AutoSize = true;
-            this.Destination.Location = new System.Drawing.Point(86, 81);
-            this.Destination.Name = "Destination";
-            this.Destination.Size = new System.Drawing.Size(35, 13);
-            this.Destination.TabIndex = 6;
-            this.Destination.Text = "label2";
+            this.Folder.AutoSize = true;
+            this.Folder.Location = new System.Drawing.Point(86, 81);
+            this.Folder.Name = "Destination";
+            this.Folder.Size = new System.Drawing.Size(35, 13);
+            this.Folder.TabIndex = 6;
+            this.Folder.Text = "label2";
             // 
             // groupBox1
             // 
@@ -123,7 +123,7 @@ namespace BinToAssembly
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.VasmLocation);
-            this.groupBox1.Controls.Add(this.Destination);
+            this.groupBox1.Controls.Add(this.Folder);
             this.groupBox1.Controls.Add(this.Processor);
             this.groupBox1.Controls.Add(this.Flag);
             this.groupBox1.Controls.Add(this.Kickhunk);
@@ -234,7 +234,7 @@ namespace BinToAssembly
         private System.Windows.Forms.Label Kickhunk;
         private System.Windows.Forms.Label Fhunk;
         private System.Windows.Forms.Label Flag;
-        private System.Windows.Forms.Label Destination;
+        private System.Windows.Forms.Label Folder;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;

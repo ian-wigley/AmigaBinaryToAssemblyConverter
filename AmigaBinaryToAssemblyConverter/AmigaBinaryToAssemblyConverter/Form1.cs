@@ -7,7 +7,6 @@ using System.Windows.Forms;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Text;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace BinToAssembly
 {
@@ -15,11 +14,6 @@ namespace BinToAssembly
     {
         protected List<string> code = new List<string>();
         protected List<string> lineNumbers = new List<string>();
-        private readonly List<string> passOne = new List<string>();
-        private readonly List<string> passTwo = new List<string>();
-        private readonly List<string> found = new List<string>();
-        private readonly Dictionary<string, string> labelLoc = new Dictionary<string, string>();
-        private readonly Dictionary<string, string> branchLoc = new Dictionary<string, string>();
         private readonly PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
         private byte[] data;
         private readonly AssemblyCreator assemblyCreator;
@@ -193,11 +187,10 @@ namespace BinToAssembly
         private void ClearRightWindow()
         {
             AssemblyView.Text = "";
-            passOne.Clear();
-            passTwo.Clear();
-            found.Clear();
-            labelLoc.Clear();
-            branchLoc.Clear();
+            assemblyCreator.PassOne.Clear();
+            assemblyCreator.PassTwo.Clear();
+            assemblyCreator.Found.Clear();
+            assemblyCreator.LabelLocation.Clear();
         }
 
         /// <summary>
@@ -217,7 +210,7 @@ namespace BinToAssembly
             object sender,
             EventArgs e)
         {
-            Save(passTwo);
+            Save(assemblyCreator.PassTwo);
         }
 
         /// <summary>

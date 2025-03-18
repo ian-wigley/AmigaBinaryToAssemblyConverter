@@ -15,8 +15,8 @@ namespace BinToAssembly
         protected List<string> code = new List<string>();
         protected List<string> lineNumbers = new List<string>();
         private readonly PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
-        private byte[] data;
         private readonly AssemblyCreator assemblyCreator;
+        private byte[] data;
 
         public BinaryConverter()
         {
@@ -277,7 +277,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// Method to
+        /// Method to Compile
         /// </summary>
         private void Compile_Click(object sender, EventArgs e)
         {

@@ -14,9 +14,9 @@
             string dataSize
             )
         {
-            m_codeOne = codeOne;
-            m_codeTwo = codeTwo;
-            m_code = codeOne + codeTwo;
+            CodeOne = codeOne;
+            CodeTwo = codeTwo;
+            Code = codeOne + codeTwo;
             m_name = name;
             m_numberOfBytes = numberOfBytes;
             m_prefix = prefix;
@@ -37,14 +37,14 @@
 
             filePosition += 2;
 
-            if (NumberOfBytes == 1)
-            {
-                if (m_code == "7665")
-                {
-                    var debug = true;
-                    //elementOne = m_codeTwo;
-                }
-            }
+            //if (NumberOfBytes == 1)
+            //{
+            //    if (Code == "7665")
+            //    {
+            //        var debug = true;
+            //        //elementOne = m_codeTwo;
+            //    }
+            //}
 
             if (NumberOfBytes == 2)
             {

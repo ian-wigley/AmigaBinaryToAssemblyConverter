@@ -11,10 +11,9 @@
         protected string m_dataSize = "";
         protected string pad = "    ";
 
-        public string m_codeOne { get; set; }
-        public string m_codeTwo { get; set; }
-        public string m_code { get; set; }
-        public string Code { get { return m_code; } }
+        public string CodeOne { get; set; }
+        public string CodeTwo { get; set; }
+        public string Code { get; set; }
         public string Name { get { return m_name; } }
         public int NumberOfBytes { get { return m_numberOfBytes; } }
         public string Prefix { get { return m_prefix; } }
@@ -95,6 +94,9 @@
             }
         }
 
+        /// <summary>
+        /// Get Two Shorts
+        /// </summary>
         protected string GetTwoShorts(ref int filePosition, byte[] binaryFileData)
         {
             return ((short)binaryFileData[filePosition++]).ToString("X2").ToUpper() +

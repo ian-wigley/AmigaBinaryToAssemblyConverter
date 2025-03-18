@@ -7,7 +7,7 @@ namespace BinToAssembly
     public class XmlLoader
     {
         public bool Valid { set; get; }
-        public SettingsCache SettingsCache { private set; get; }
+        public SettingsCache SettingsCache { get; private set; }
 
         public void LoadSettings()
         {

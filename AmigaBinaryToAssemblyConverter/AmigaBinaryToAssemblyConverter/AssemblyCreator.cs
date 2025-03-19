@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace BinToAssembly
@@ -85,15 +86,9 @@ namespace BinToAssembly
                         case "4280": // CLR
                             PassOne.Add(lineDetails[21] + " " + lineDetails[22]);
                             break;
-                        //case "51C8": // DBF
-                        //   //string[] locations = lineDetails[18].Split(',');
-                        //   //var temp = locations[1].Replace("$", "").ToUpper();
-                        //   //temp = ConvertToHexEight(temp);
-                        //   //if (!branchLoc.ContainsKey(temp))
-                        //   //{
-                        //   //    branchLoc.Add(temp, branch + branchCount++.ToString());
-                        //   //}
-                        //   break;
+                        case "51C8": // DBF
+                            ExtractDBFInformation(ref labelCount, lineDetails);
+                            break;
                         default:
                             // Add the DC.W's
                             if (dataWord != "")
@@ -254,6 +249,21 @@ namespace BinToAssembly
                 LabelLocation.Add(location, label + labelCount++.ToString());
             }
             PassOne.Add(lineDetails[length - 1] + " " + lineDetails[length]);
+        }
+
+        /// <summary>
+        /// Extract DBF information
+        /// </summary>
+        private void ExtractDBFInformation(ref int labelCount, string[] lineDetails)
+        {
+            // TODO update the DBF destination with the Label info now
+            var temp = (Convert.ToInt16(lineDetails[0], 16) + Convert.ToInt16(lineDetails[2], 16)).ToString("X8");
+            if (!LabelLocation.ContainsKey(temp))
+            {
+                LabelLocation.Add(temp, label + labelCount++.ToString());
+            }
+            int length = lineDetails.Length;
+            PassOne.Add(lineDetails[length - 2] + " " + lineDetails[length - 1]);
         }
 
         /// <summary>

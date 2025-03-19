@@ -102,10 +102,10 @@
 	<code>01¬08¬MOVEP.W¬2¬$¬(A0)¬,D0¬</code>
 	<code>01¬0A¬MOVEP.W¬2¬$¬(A2)¬,D0¬</code>
 	<code>01¬11¬BTST.B¬1¬D0¬¬,(A1)¬</code>
-	<code>01¬46¬;BCHG.L¬1¬¬¬D0,D6¬</code>
+	<code>01¬46¬BCHG¬1¬¬¬D0,D6¬</code>
 	<code>01¬54¬BCHG¬1¬D0¬¬,(A4)¬</code>
 	<code>01¬60¬;TODO!¬1¬¬¬¬</code>
-	<code>01¬76¬;BCHG.B¬2¬D0¬¬,(A6)¬</code>
+	<code>01¬76¬BCHG¬2¬D0¬¬,(A6)¬</code>
 	<code>01¬80¬BCLR¬1¬D0¬¬,D0¬</code>
 	<code>01¬82¬BCLR¬1¬D0¬¬,D2¬</code>
 	<code>01¬84¬ILLEGAL¬1¬¬¬¬</code>
@@ -130,9 +130,7 @@
 	<code>03¬00¬BTST¬1¬D1¬¬,D0¬</code>
 	<code>03¬11¬BTST¬1¬D1¬¬,(A1)¬</code>
 	<code>03¬33¬BTST.B¬2¬D1,$¬¬(A3)¬</code>
-	<!--<code>03¬38¬;TODO!¬1¬¬¬¬</code>-->
 	<code>03¬38¬BTST¬2¬D1,$¬¬¬</code>
-	
 	<code>03¬49¬MOVEP.L¬2¬$¬¬(A1),D1¬</code>
 	<code>04¬00¬SUB¬2¬#$¬¬,D0¬</code>
 	<code>04¬01¬SUB¬2¬#$¬¬,D1¬</code>
@@ -157,7 +155,6 @@
 	<code>06¬79¬ADD¬6¬#$¬,$¬¬</code>
 	<code>07¬0D¬MOVEP.W¬2¬$¬(A5)¬,D3¬</code>
 	<code>07¬30¬ILLEGAL¬1¬¬¬¬</code>
-	
 	<code>07¬55¬BCHG¬1¬D3¬¬,(A5)¬</code>
 	<code>07¬77¬BCHG¬2¬D3,$77(A7,D0)¬¬¬</code>
 	<code>07¬A4¬;TODO!¬1¬¬¬¬</code>
@@ -169,9 +166,7 @@
 	<code>08¬28¬BTST¬4¬#¬,$¬¬</code>
 	<code>08¬39¬BTST.B¬6¬#$¬,$¬¬</code>
 	<code>08¬40¬ILLEGAL¬1¬¬¬¬</code>
-	<!--<code>08¬40¬;TODO!¬1¬¬¬¬</code>-->
 	<!--<code>08¬40¬BCHG¬2¬#$¬¬,D0¬</code>-->
-	
 	<code>08¬66¬ILLEGAL¬1¬¬¬¬</code>
 	<code>08¬79¬BCHG.B¬6¬#$¬,$¬¬</code>
 	<code>08¬88¬ILLEGAL¬1¬¬¬¬</code>
@@ -197,7 +192,6 @@
 	<code>0A¬54¬EORI.W¬2¬#$¬¬,(A4)¬</code>
 	<code>0A¬58¬EORI.W¬2¬#$¬¬,(A0)+¬</code>
 	<code>0A¬5C¬EORI.W¬2¬#$¬¬,(A4)+¬</code>
-	<!--<code>0A¬60¬;TODO!¬1¬¬¬¬</code>-->
 	<code>0A¬60¬EORI.W¬2¬#$¬¬,-(A0)¬</code>
 	<code>0A¬64¬EORI.W¬2¬#$¬¬,-(A4)¬</code>
 	<code>0A¬68¬;TODO!¬1¬¬¬¬</code>
@@ -206,9 +200,7 @@
 	<code>0A¬88¬ILLEGAL¬1¬¬¬¬</code>	
 	<code>0A¬AA¬EOR.L¬6¬#$¬¬,$¬(A2)</code>
 	<code>0B¬00¬BTST¬1¬D5¬¬,D0¬</code>
-	<!--<code>0B¬70¬;TODO!¬1¬¬¬¬</code>-->
 	<code>0B¬70¬ILLEGAL¬1¬¬¬¬</code>
-	
 	<code>0B¬BB¬ILLEGAL¬1¬¬¬¬</code>
 	<code>0C¬00¬CMP¬2¬#$¬¬,D0¬</code>
 	<code>0C¬11¬CMP¬2¬¬¬¬</code>

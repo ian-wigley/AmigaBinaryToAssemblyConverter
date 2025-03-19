@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BinToAssembly;
-using System.Collections.Generic;
 
 namespace MultiBinaryToAssemblyConverterTests
 {
@@ -33,7 +32,8 @@ namespace MultiBinaryToAssemblyConverterTests
             {
                 Code = new[] {
                     "00000000 2C78 0004               MOVEA.L $0004.W,A6",
-                    "00000004 43FA 007E               LEA $007E(PC),A1" }
+                    "00000004 43FA 007E               LEA $007E(PC),A1" 
+                }
             };
             assemblyCreator.InitialPass("0", "2");
             Assert.AreEqual(2, assemblyCreator.PassOne.Count);
@@ -79,9 +79,11 @@ namespace MultiBinaryToAssemblyConverterTests
         {
             AssemblyCreator assemblyCreator = new AssemblyCreator
             {
-                Code = new[] { "000000FC 51C8 FFEA               DBF D0,$FFEA" }
+                Code = new[] { 
+                    "000000F0 4BF9 00DF F000          LEA $00DFF000,A5", 
+                    "000000FC 51C8 FFEA               DBF D0,$FFEA" }
             };
-            assemblyCreator.InitialPass("000000FC", "000000FE");
+            assemblyCreator.InitialPass("000000F0", "000000FE");
             assemblyCreator.SecondPass();
             Assert.AreEqual(assemblyCreator.Code.Length, assemblyCreator.PassOne.Count);
         }

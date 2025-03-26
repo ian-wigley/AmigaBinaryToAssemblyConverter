@@ -5,9 +5,7 @@ namespace BinToAssembly
 {
     public partial class MemorySelector : Form
     {
-        private IList<object> memValues = new List<object>();
-        private char[] m_startAdress;
-        private char[] m_endAdress;
+        private readonly IList<object> memValues = new List<object>();
 
         public string GetSelectedMemStartLocation
         {
@@ -34,9 +32,6 @@ namespace BinToAssembly
             MaximizeBox = false;
             MinimizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedSingle;
-
-            m_startAdress = startAdress;
-            m_endAdress = endAdress;
 
             for (int i = 0; i < 16; i++)
             {

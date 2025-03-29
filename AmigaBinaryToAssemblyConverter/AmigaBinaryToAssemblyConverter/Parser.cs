@@ -63,7 +63,6 @@ namespace BinToAssembly
                 lineNumbers.Add(lineNumber.ToString("X8"));
                 string line = (startAddress + filePosition).ToString("X8");
                 line += " " + opCode.ToString("X4");
-                int pc = startAddress + filePosition;
                 bool found = false;
 
                 // Get the Opcode object
@@ -108,7 +107,7 @@ namespace BinToAssembly
         /// </summary>
         private void ConvertDataToWords()
         {
-            // TODO
+            // TODO finish implementation
         }
 
         /// <summary>
@@ -213,9 +212,6 @@ namespace BinToAssembly
                 case "4A13":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-                //case "6000":
-                //    line += oc.Detail(ref filePosition, binaryFileData);
-                //    break;
                 case "0A00": // EOR
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;

@@ -9,6 +9,9 @@ namespace BinToAssembly
         private readonly XmlLoader xmlLoader = new XmlLoader();
         public XmlLoader GetXMLLoader { get { return xmlLoader; } }
 
+        /// <summary>
+        /// Init
+        /// </summary>
         public void Init()
         {
             m_OpCodes.Clear();
@@ -17,6 +20,9 @@ namespace BinToAssembly
             xmlLoader.LoadOpCodes(m_OpCodes);
         }
 
+        /// <summary>
+        /// Get Op Code
+        /// </summary>
         public dynamic GetOpCode(string one, string two)
         {
             return m_OpCodes.Find(opCode => opCode.CodeOne.Equals(one) && opCode.CodeTwo.Equals(two));

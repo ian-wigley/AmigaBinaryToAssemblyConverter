@@ -9,6 +9,9 @@ namespace BinToAssembly
         public bool Valid { set; get; }
         public SettingsCache SettingsCache { get; private set; }
 
+        /// <summary>
+        /// Method Loads and Parses the Settings XML file
+        /// </summary>
         public void LoadSettings()
         {
             string vasmLocation = "";

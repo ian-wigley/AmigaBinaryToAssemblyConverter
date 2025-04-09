@@ -33,7 +33,7 @@ namespace MultiBinaryToAssemblyConverterTests
         public void TestRTSOpcode()
         {
             BitSlicer(0x4e75, out string partOne, out string partTwo);
-            dynamic oc = InitOpCodeList().GetOpCode(partOne, partTwo);
+            BaseOpCode oc = InitOpCodeList().GetOpCode(partOne, partTwo);
             Assert.IsTrue(oc.Name == "RTS");
         }
 
@@ -41,7 +41,7 @@ namespace MultiBinaryToAssemblyConverterTests
         public void TestFormatMoveOpcode()
         {
             BitSlicer(0x13fc, out string partOne, out string partTwo);
-            dynamic oc = InitOpCodeList().GetOpCode(partOne, partTwo);
+            BaseOpCode oc = InitOpCodeList().GetOpCode(partOne, partTwo);
             Assert.IsTrue(oc.Name == "MOVE.B");
         }
 
@@ -49,7 +49,7 @@ namespace MultiBinaryToAssemblyConverterTests
         public void TestFormatJSROpcode()
         {
             BitSlicer(0x4eb9, out string partOne, out string partTwo);
-            dynamic oc = InitOpCodeList().GetOpCode(partOne, partTwo);
+            BaseOpCode oc = InitOpCodeList().GetOpCode(partOne, partTwo);
             Assert.IsTrue(oc.Name == "JSR");
         }
 
@@ -72,7 +72,7 @@ namespace MultiBinaryToAssemblyConverterTests
         public void TestValidOpcodes(int op, string name)
         {
             BitSlicer(op, out string partOne, out string partTwo);
-            dynamic oc = InitOpCodeList().GetOpCode(partOne, partTwo);
+            BaseOpCode oc = InitOpCodeList().GetOpCode(partOne, partTwo);
             Assert.IsTrue(oc.Name == name);
         }
 
@@ -94,7 +94,7 @@ namespace MultiBinaryToAssemblyConverterTests
         public void TestMultiOpcodes(int op, string expected, ushort[] data)
         {
             BitSlicer(op, out string partOne, out string partTwo);
-            dynamic oc = InitOpCodeList().GetOpCode(partOne, partTwo);
+            BaseOpCode oc = InitOpCodeList().GetOpCode(partOne, partTwo);
             Assert.IsTrue(oc.Name == expected);
 
             //dynamic oc = InitOpCodeList().GetOpCode(op.ToString("X2"), op.ToString("X2"));
@@ -108,7 +108,7 @@ namespace MultiBinaryToAssemblyConverterTests
         {
             Parser parser = new Parser();
             BitSlicer(0x4eb9, out string partOne, out string partTwo);
-            dynamic oc = InitOpCodeList().GetOpCode(partOne, partTwo);
+            BaseOpCode oc = InitOpCodeList().GetOpCode(partOne, partTwo);
 
             int filePosition = 0;
             string line = (filePosition).ToString("X8");

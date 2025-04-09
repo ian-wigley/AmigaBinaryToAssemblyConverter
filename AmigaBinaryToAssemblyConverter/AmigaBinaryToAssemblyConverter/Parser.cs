@@ -13,7 +13,7 @@ namespace BinToAssembly
         private readonly string graphicsLibrary = "graphics.library";
 
         /// <summary>
-        ///
+        /// Load Binary Data
         /// </summary>
         public byte[] LoadBinaryData(string fileName)
         {
@@ -29,7 +29,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Parse File Content
         /// </summary>
         public void ParseFileContent(
             byte[] data,
@@ -66,7 +66,7 @@ namespace BinToAssembly
                 bool found = false;
 
                 // Get the Opcode object
-                var oc = populateOpCodeList.GetOpCode(firstByte.ToString("X2"), secondByte.ToString("X2"));
+                BaseOpCode oc = populateOpCodeList.GetOpCode(firstByte.ToString("X2"), secondByte.ToString("X2"));
 
                 if (filePosition == start || filePosition == start + 1)
                 {
@@ -92,9 +92,9 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Convert Data To Bytes => DC.B
         /// </summary>
-        private int ConvertDataToByte(int filePosition, out string line, out dynamic oc)
+        private int ConvertDataToByte(int filePosition, out string line, out BaseOpCode oc)
         {
             line = (startAddress + filePosition).ToString("X8") + "                         DC.B '" + graphicsLibrary + "'";
             oc = null;

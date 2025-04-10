@@ -17,7 +17,7 @@ namespace BinToAssembly
             m_OpCodes.Clear();
             xmlLoader.Valid = false;
             xmlLoader.LoadSettings();
-            xmlLoader.LoadOpCodes(m_OpCodes);
+            bool result = xmlLoader.LoadOpCodes(m_OpCodes);
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace MultiBinaryToAssemblyConverterTests
         private PopulateOpCodeList InitOpCodeList()
         {
             PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
-            populateOpCodeList.Init();
+            bool result = populateOpCodeList.Init();
             return populateOpCodeList;
         }
 

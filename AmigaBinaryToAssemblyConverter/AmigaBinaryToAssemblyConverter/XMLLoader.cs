@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace BinToAssembly
@@ -49,54 +51,64 @@ namespace BinToAssembly
         /// <summary>
         /// Load Op Codes
         /// </summary>
-        public void LoadOpCodes(List<BaseOpCode> m_OpCodes)
+        public bool LoadOpCodes(List<BaseOpCode> m_OpCodes)
         {
             string processor = "68000";
             string xmlOpCodes = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()) + "/68000-codes.xml";
+
             XmlTextReader reader = new XmlTextReader(xmlOpCodes);
-            while (reader.Read())
+            try
             {
-                switch (reader.NodeType)
+                while (reader.Read())
                 {
-                    // The node is an element.
-                    case XmlNodeType.Element:
-                        break;
-                    // Display the text in each element.
-                    case XmlNodeType.Text:
-                        if (Valid)
-                        {
-                            // Split the line using the delimiter
-                            string[] split = reader.Value.Split('¬');
-                            string name = split[2];
-                            GetDataType(name, out string dataSize);
-                            if (name.Contains("BNE") || name.Contains("BEQ") || name.Contains("BRA") || name.Contains("BCS") || name.Contains("BLE") || name.Contains("BLT") || name.Contains("BMI") || name.Contains("BVS"))
+                    switch (reader.NodeType)
+                    {
+                        // The node is an element.
+                        case XmlNodeType.Element:
+                            break;
+                        // Display the text in each element.
+                        case XmlNodeType.Text:
+                            if (Valid)
                             {
-                                m_OpCodes.Add(new Branch(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
+                                // Split the line using the delimiter
+                                string[] split = reader.Value.Split('¬');
+                                string name = split[2];
+                                GetDataType(name, out string dataSize);
+                                if (name.Contains("BNE") || name.Contains("BEQ") || name.Contains("BRA") || name.Contains("BCS") || name.Contains("BLE") || name.Contains("BLT") || name.Contains("BMI") || name.Contains("BVS"))
+                                {
+                                    m_OpCodes.Add(new Branch(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
+                                }
+                                else if (name.Contains("JSR") || name.Contains("BSR"))
+                                {
+                                    m_OpCodes.Add(new Jump(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
+                                }
+                                if (name.Contains("MOVE"))
+                                {
+                                    m_OpCodes.Add(new Move(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
+                                }
+                                else
+                                {
+                                    m_OpCodes.Add(new OpCode(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
+                                }
                             }
-                            else if (name.Contains("JSR") || name.Contains("BSR"))
-                            {
-                                m_OpCodes.Add(new Jump(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
-                            }
-                            if (name.Contains("MOVE"))
-                            {
-                                m_OpCodes.Add(new Move(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
-                            }
-                            else
-                            {
-                                m_OpCodes.Add(new OpCode(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
-                            }
-                        }
 
-                        if (reader.Value.Equals(processor))
-                        {
-                            Valid = true;
-                        }
+                            if (reader.Value.Equals(processor))
+                            {
+                                Valid = true;
+                            }
 
-                        break;
-                    case XmlNodeType.EndElement:
-                        break;
+                            break;
+                        case XmlNodeType.EndElement:
+                            break;
+                    }
                 }
+                return true;
             }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Error loading the 68000-codes.xml");
+            }
+            return false;
         }
 
         /// <summary>

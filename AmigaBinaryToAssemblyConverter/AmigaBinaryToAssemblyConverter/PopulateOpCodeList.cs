@@ -12,12 +12,12 @@ namespace BinToAssembly
         /// <summary>
         /// Init
         /// </summary>
-        public void Init()
+        public bool Init()
         {
             m_OpCodes.Clear();
             xmlLoader.Valid = false;
             xmlLoader.LoadSettings();
-            bool result = xmlLoader.LoadOpCodes(m_OpCodes);
+            return xmlLoader.LoadOpCodes(m_OpCodes);
         }
 
         /// <summary>

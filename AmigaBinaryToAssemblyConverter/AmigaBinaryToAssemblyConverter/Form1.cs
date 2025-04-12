@@ -31,8 +31,7 @@ namespace BinToAssembly
             generateLabelsToolStripMenuItem.Enabled = false;
             leftWindowToolStripMenuItem.Enabled = false;
             rightWindowToolStripMenuItem.Enabled = false;
-            populateOpCodeList.Init();
-
+            bool result = populateOpCodeList.Init();
             Numbers.Font = AssemblyView.Font;
             CompilerTextBox.Cursor = Cursors.Arrow;
             CompilerTextBox.GotFocus += CompilerTextBox_GotFocus;

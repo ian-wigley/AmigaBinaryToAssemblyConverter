@@ -15,4 +15,7 @@ When the Amiga bytes have been loaded by the application, the result will be dis
 <br>To test the validity of the de-compiled code, clicking `Compile` from the main menu `Build` => `Compile` will compile the code with `VASM`.
 <br>
 <br>
-![](AmigaBinaryToAssemblyConverter.jpg)
+![](ReadMeImages/AmigaBinaryToAssemblyConverter.jpg)
+![](ReadMeImages/ConvertSelectionToData.png)
+![](ReadMeImages/ConvertToData.png)
+![](ReadMeImages/ConvertToData.png)

@@ -90,7 +90,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// Method to
         /// </summary>
         private void OpenToolStripMenuItem_Click(
             object sender,
@@ -164,7 +164,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// Method to
+        /// Method to Clear Collections
         /// </summary>
         private void ClearCollections()
         {
@@ -173,7 +173,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// Method to
+        /// Method to Clear Left Window
         /// </summary>
         private void ClearLeftWindow()
         {
@@ -181,7 +181,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// Method to
+        /// Method to Clear Right Window
         /// </summary>
         private void ClearRightWindow()
         {
@@ -326,7 +326,10 @@ namespace BinToAssembly
                 CompilerTextBox.Text += p.StandardOutput.ReadToEnd();
                 CompilerTextBox.Text += p.StandardError.ReadToEnd();
             }
-            catch (Exception ex) { }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Error Ocurred");
+            }
             finally
             {
                 // Delete the temp file
@@ -335,7 +338,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// Method to
+        /// Method to handle the Configure Click event
         /// </summary>
         private void Configure_Click(object sender, EventArgs e)
         {

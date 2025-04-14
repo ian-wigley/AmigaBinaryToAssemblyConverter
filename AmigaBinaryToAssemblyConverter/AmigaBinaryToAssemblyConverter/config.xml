@@ -1,2 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-	<setting vasmLocation='C:/Dev/ToolChain/vasm' processor='-m68020' kickhunk='-kick1hunks' fhunk='-Fhunkexe' flag='-o' folder='c:/temp/' filename='hellmans-test.exe'></setting>
+	<setting vasmLocation='C:/Dev/ToolChain/vasm.exe' processor='-m68020' kickhunk='-kick1hunks' fhunk='-Fhunkexe' flag='-o' folder='c:/temp/' filename='hellmans-test.exe'></setting>

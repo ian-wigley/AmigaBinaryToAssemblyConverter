@@ -1,9 +1,14 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace BinToAssembly
 {
     public partial class ConfigureSettings : Form
     {
+        private bool settingsChanged = false;
+
         public ConfigureSettings(SettingsCache sc)
         {
             InitializeComponent();
@@ -12,8 +17,58 @@ namespace BinToAssembly
             Kickhunk.Text = sc.Kickhunk;
             Fhunk.Text = sc.Fhunk;
             Flag.Text = sc.Flag;
-            Folder.Text = sc.Folder;
+            Folder_old.Text = sc.Folder;
             FileName.Text = sc.Filename;
+        }
+
+        private void BrowseToVasmLocation(object sender, System.EventArgs e)
+        {
+            string vasm = "vasm.exe";
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Title = "Open File",
+                InitialDirectory = @"*.*",
+                Filter = "All files (*.*)|*.*|VASM EXE (*." + vasm.ToLower() + ")|*." + vasm.ToUpper() + "EXE",
+                FilterIndex = 2,
+                RestoreDirectory = true
+            };
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (openFileDialog.FileName != VasmLocation.Text) 
+                {
+                    VasmLocation.Text = openFileDialog.FileName;
+                    VasmLocation.ForeColor = Color.Red;
+                    settingsChanged = true;
+                }
+            }
+        }
+
+        private void BrowseToTheExeFolder(object sender, System.EventArgs e)
+        {
+            // TODO
+            FolderBrowserDialog fd = new FolderBrowserDialog
+            {
+                Description = "Please choose destination"
+            };
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                settingsChanged = true;
+            }
+        }
+
+        private void VasmLocationChangedEvent(object sender, System.EventArgs e)
+        {
+            // TODO
+        }
+
+        private void SaveChangesEvent(object sender, System.EventArgs e)
+        {
+            if (settingsChanged)
+            {
+                // TODO
+                string settingsXML = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()) + "/" + "config_out.xml";
+                XmlTextWriter writer = new XmlTextWriter(settingsXML, encoding: null);
+            }
         }
 
         private void CloseTheSettings(object sender, System.EventArgs e)

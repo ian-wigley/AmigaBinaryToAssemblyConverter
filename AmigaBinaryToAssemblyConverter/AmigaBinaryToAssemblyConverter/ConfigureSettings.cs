@@ -34,7 +34,7 @@ namespace BinToAssembly
             };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (openFileDialog.FileName != VasmLocation.Text) 
+                if (openFileDialog.FileName != VasmLocation.Text)
                 {
                     VasmLocation.Text = openFileDialog.FileName;
                     VasmLocation.ForeColor = Color.Red;
@@ -65,9 +65,21 @@ namespace BinToAssembly
         {
             if (settingsChanged)
             {
-                // TODO
                 string settingsXML = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()) + "/" + "config_out.xml";
-                XmlTextWriter writer = new XmlTextWriter(settingsXML, encoding: null);
+                using (XmlWriter writer = XmlWriter.Create(settingsXML))
+                {
+                    writer.WriteStartDocument();
+                    writer.WriteStartElement("setting");
+                    writer.WriteElementString("vasmLocation", VasmLocation.Text);
+                    writer.WriteElementString("processor", Processor.Text);
+                    writer.WriteElementString("kickhunk", Kickhunk.Text);
+                    writer.WriteElementString("fhunk", Fhunk.Text);
+                    writer.WriteElementString("flag", Flag.Text);
+                    writer.WriteElementString("folder", Folder_old.Text);
+                    writer.WriteElementString("filename", FileName.Text);
+                    writer.WriteEndElement();
+                    writer.WriteEndDocument();
+                }
             }
         }
 

@@ -70,13 +70,13 @@ namespace BinToAssembly
                 {
                     writer.WriteStartDocument();
                     writer.WriteStartElement("setting");
-                    writer.WriteElementString("vasmLocation", VasmLocation.Text);
-                    writer.WriteElementString("processor", Processor.Text);
-                    writer.WriteElementString("kickhunk", Kickhunk.Text);
-                    writer.WriteElementString("fhunk", Fhunk.Text);
-                    writer.WriteElementString("flag", Flag.Text);
-                    writer.WriteElementString("folder", Folder_old.Text);
-                    writer.WriteElementString("filename", FileName.Text);
+                    writer.WriteAttributeString("vasmLocation", VasmLocation.Text);
+                    writer.WriteAttributeString("processor", Processor.Text);
+                    writer.WriteAttributeString("kickhunk", Kickhunk.Text);
+                    writer.WriteAttributeString("fhunk", Fhunk.Text);
+                    writer.WriteAttributeString("flag", Flag.Text);
+                    writer.WriteAttributeString("folder", Folder_old.Text);
+                    writer.WriteAttributeString("filename", FileName.Text);
                     writer.WriteEndElement();
                     writer.WriteEndDocument();
                 }

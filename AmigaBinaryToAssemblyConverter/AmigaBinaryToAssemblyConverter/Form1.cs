@@ -21,7 +21,6 @@ namespace BinToAssembly
         public BinaryConverter()
         {
             InitializeComponent();
-
             // Sets the byte viewer display mode.
             byteviewer.SetDisplayMode(DisplayMode.Hexdump);
             MaximizeBox = false;
@@ -262,7 +261,10 @@ namespace BinToAssembly
         private void LabelGenerator_Click(object sender, EventArgs e)
         {
             DisplayMemorySelector();
-            Compile.Enabled = true;
+            if (populateOpCodeList.GetXMLLoader.SettingsLoaded)
+            {
+                Compile.Enabled = true;
+            }
             Numbers.Select();
             AddLineNumbers();
         }

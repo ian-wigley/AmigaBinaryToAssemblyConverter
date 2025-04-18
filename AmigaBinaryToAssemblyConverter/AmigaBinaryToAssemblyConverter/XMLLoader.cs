@@ -10,6 +10,7 @@ namespace BinToAssembly
     {
         public bool Valid { set; get; }
         public SettingsCache SettingsCache { get; private set; }
+        public bool SettingsLoaded { get; private set; }
 
         /// <summary>
         /// Method Loads and Parses the Settings XML file
@@ -37,6 +38,12 @@ namespace BinToAssembly
                 flag = reader.GetAttribute("flag");
                 folder = reader.GetAttribute("folder");
                 filename = reader.GetAttribute("filename");
+                SettingsLoaded = true;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Error loading the VASM Config.xml file");
+                SettingsLoaded = false;
             }
             finally
             {

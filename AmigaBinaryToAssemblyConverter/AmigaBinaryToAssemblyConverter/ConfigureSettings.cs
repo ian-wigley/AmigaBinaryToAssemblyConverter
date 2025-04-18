@@ -65,7 +65,7 @@ namespace BinToAssembly
         {
             if (settingsChanged)
             {
-                string settingsXML = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()) + "/" + "config_out.xml";
+                string settingsXML = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()) + "/" + "config.xml";
                 using (XmlWriter writer = XmlWriter.Create(settingsXML))
                 {
                     writer.WriteStartDocument();

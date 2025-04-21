@@ -56,11 +56,11 @@
     <Compile Include="Parser.cs" />
     <Compile Include="BaseOpCode.cs" />
     <Compile Include="Branch.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="BinaryConverter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="BinaryConverter.Designer.cs">
+      <DependentUpon>BinaryConverter.cs</DependentUpon>
     </Compile>
     <Compile Include="Jump.cs" />
     <Compile Include="MemoryLocation.cs">
@@ -85,8 +85,8 @@
     <EmbeddedResource Include="ConfigureSettings.resx">
       <DependentUpon>ConfigureSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="BinaryConverter.resx">
+      <DependentUpon>BinaryConverter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MemoryLocation.resx">
       <DependentUpon>MemoryLocation.cs</DependentUpon>

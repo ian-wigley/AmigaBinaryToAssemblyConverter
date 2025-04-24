@@ -16,7 +16,7 @@ namespace BinToAssembly
         protected List<string> lineNumbers = new List<string>();
         private readonly PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
         private readonly AssemblyCreator assemblyCreator;
-        private byte[] data;
+        protected byte[] data;
 
         public BinaryConverter()
         {
@@ -399,7 +399,7 @@ namespace BinToAssembly
         /// <summary>
         /// Method to handle the convert To Data DCB Click
         /// </summary>
-        private void ConvertToDataDCBClick(object sender, EventArgs e)
+        protected void ConvertToDataDCBClick(object sender, EventArgs e)
         {
             string selectedText = textBox1.SelectedText;
             string[] splitSelectedText = selectedText.Split('\n');

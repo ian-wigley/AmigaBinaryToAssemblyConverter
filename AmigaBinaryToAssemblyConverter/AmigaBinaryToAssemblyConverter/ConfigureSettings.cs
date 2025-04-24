@@ -21,6 +21,9 @@ namespace BinToAssembly
             FileName.Text = sc.Filename;
         }
 
+        /// <summary>
+        /// BrowseToVasmLocation
+        /// </summary>
         private void BrowseToVasmLocation(object sender, System.EventArgs e)
         {
             string vasm = "vasm.exe";
@@ -43,6 +46,9 @@ namespace BinToAssembly
             }
         }
 
+        /// <summary>
+        /// BrowseToTheExeFolder
+        /// </summary>
         private void BrowseToTheExeFolder(object sender, System.EventArgs e)
         {
             // TODO
@@ -56,11 +62,17 @@ namespace BinToAssembly
             }
         }
 
+        /// <summary>
+        /// VasmLocationChangedEvent
+        /// </summary>
         private void VasmLocationChangedEvent(object sender, System.EventArgs e)
         {
             // TODO
         }
 
+        /// <summary>
+        /// SaveChangesEvent
+        /// </summary>
         private void SaveChangesEvent(object sender, System.EventArgs e)
         {
             if (settingsChanged)
@@ -83,6 +95,9 @@ namespace BinToAssembly
             }
         }
 
+        /// <summary>
+        /// CloseTheSettings
+        /// </summary>
         private void CloseTheSettings(object sender, System.EventArgs e)
         {
             DialogResult = DialogResult.OK;

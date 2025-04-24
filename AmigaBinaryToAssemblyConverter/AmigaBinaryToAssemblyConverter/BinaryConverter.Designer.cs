@@ -400,7 +400,7 @@ namespace BinToAssembly
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        protected System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;

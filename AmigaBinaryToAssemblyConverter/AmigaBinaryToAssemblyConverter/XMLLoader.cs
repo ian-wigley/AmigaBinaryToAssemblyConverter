@@ -47,16 +47,13 @@ namespace BinToAssembly
             }
             finally
             {
-                if (reader != null)
-                {
-                    reader.Close();
-                    SettingsCache = new SettingsCache(vasmLocation, processors, kickhunk, fhunk, flag, folder, filename);
-                }
+                reader.Close();
+                SettingsCache = new SettingsCache(vasmLocation, processors, kickhunk, fhunk, flag, folder, filename);
             }
         }
 
         /// <summary>
-        /// Load Op Codes
+        /// Load and parse the XML Op Codes
         /// </summary>
         public bool LoadOpCodes(List<BaseOpCode> m_OpCodes)
         {

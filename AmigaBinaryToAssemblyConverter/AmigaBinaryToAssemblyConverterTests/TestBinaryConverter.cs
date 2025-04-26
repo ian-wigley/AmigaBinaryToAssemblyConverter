@@ -4,13 +4,25 @@ using BinToAssembly;
 namespace MultiBinaryToAssemblyConverterTests
 {
     [TestClass]
-    public class TestBinaryConverter
+    public class TestBinaryConverter : BinaryConverter
     {
         [TestMethod]
         public void TestConvertToDataDCBClick()
         {
-            AssemblyCreator assemblyCreator = new AssemblyCreator();
-            Assert.IsNotNull(assemblyCreator);
+            TestBinaryConverter testBinaryConverter = new TestBinaryConverter();
+            testBinaryConverter.textBox1.Text = "00000A02 4649                    ILLEGAL\n" +
+            "00000A04 5253                    ADDQ.W #1,(A3)\n" +
+            "00000A06 5420                    ADDQ #2,-(A0)\n" +
+            "00000A08 414D                    ILLEGAL\n" +
+            "00000A0A 4947                    ILLEGAL\n" +
+            "00000A0C 4120                    CHK - (A0),D0\n" +
+            "00000A0E 4445                    NEG.W D5\n" +
+            "00000A10 4D4F                    ILLEGAL";
+            testBinaryConverter.textBox1.SelectionStart = 0;
+            testBinaryConverter.textBox1.SelectionLength = 5;
+            testBinaryConverter.data = new byte[] { 44, 120, 0, 4, 67, 250, 0, 126 };
+            testBinaryConverter.ConvertToDataDCBClick(null, null);
+            Assert.IsNotNull(testBinaryConverter);
         }
     }
 }

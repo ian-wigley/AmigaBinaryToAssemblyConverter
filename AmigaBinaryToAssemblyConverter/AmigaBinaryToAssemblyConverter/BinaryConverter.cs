@@ -416,7 +416,7 @@ namespace BinToAssembly
         /// <summary>
         /// Split To New Lines
         /// </summary>
-        private IEnumerable<string> SplitToNewLines(string value)
+        protected IEnumerable<string> SplitToNewLines(string value)
         {
             int maximumLineLength = 60;
             var words = value.Split(' ');
@@ -446,7 +446,7 @@ namespace BinToAssembly
             {
                 var todo = textBox1.Lines.ToList().FindAll(x => x.Contains(";TODO!"));
                 string temp = "";
-                foreach (object item in todo) temp += item.ToString() + "\r\n";
+                foreach (object item in todo) { temp += item.ToString() + "\r\n"; }
                 if (temp != "")
                 {
                     Clipboard.SetText(temp);

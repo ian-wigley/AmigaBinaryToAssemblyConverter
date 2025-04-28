@@ -24,5 +24,14 @@ namespace MultiBinaryToAssemblyConverterTests
             testBinaryConverter.ConvertToDataDCBClick(null, null);
             Assert.IsNotNull(testBinaryConverter);
         }
+
+        [TestMethod]
+        public void TestSplitToNewLines()
+        {
+            TestBinaryConverter testBinaryConverter = new TestBinaryConverter();
+            var result = testBinaryConverter.SplitToNewLines("00000A02 DC.B 'FIRS'");
+            Assert.IsNotNull(result);
+            Assert.Equals(result, "00000A02 DC.B 'FIRS'");
+        }
     }
 }

@@ -453,6 +453,11 @@ namespace BinToAssembly
                 }
                 return true;
             }
+            if (keyData == (Keys.Control | Keys.G))
+            {
+                textBox1.SelectionStart = 831 * 45;
+                textBox1.ScrollToCaret();
+            }
             return base.ProcessCmdKey(ref msg, keyData);
         }
     }

@@ -455,7 +455,16 @@ namespace BinToAssembly
             }
             if (keyData == (Keys.Control | Keys.G))
             {
-                textBox1.SelectionStart = 831 * 45;
+                // TODO add selection txt box & test for invalid values 
+                int line = 850;
+                string[] lines = textBox1.Lines;
+                int len = 0;
+                for (int i = 0; i < line - 1; i++)
+                {
+                    len = len + lines[i].Length + 1;
+                }
+                textBox1.Focus();
+                textBox1.Select(len, 0);
                 textBox1.ScrollToCaret();
             }
             return base.ProcessCmdKey(ref msg, keyData);

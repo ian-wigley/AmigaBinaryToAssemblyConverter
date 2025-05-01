@@ -80,7 +80,7 @@ namespace BinToAssembly
         {
             AssemblyView.Clear();
             ClearRightWindow();
-            assemblyCreator.Code = textBox1.Lines;
+            assemblyCreator.Code = DisAssemblyView.Lines;
             AssemblyView.Font = new Font(FontFamily.GenericMonospace, AssemblyView.Font.Size);
             assemblyCreator.InitialPass(start, end);
             assemblyCreator.SecondPass();
@@ -108,10 +108,10 @@ namespace BinToAssembly
             {
                 FileLoaded.Text = openFileDialog.SafeFileName;
                 ClearCollections();
-                textBox1.Clear();
+                DisAssemblyView.Clear();
                 Parser parser = new Parser();
                 data = parser.LoadBinaryData(openFileDialog.FileName);
-                parser.ParseFileContent(data, populateOpCodeList, textBox1, ref lineNumbers, ref code);
+                parser.ParseFileContent(data, populateOpCodeList, DisAssemblyView, ref lineNumbers, ref code);
                 labelGenerator.Enabled = true;
                 byteviewer.SetFile(openFileDialog.FileName);
                 generateLabelsToolStripMenuItem.Enabled = true;
@@ -250,7 +250,7 @@ namespace BinToAssembly
             EventArgs e)
         {
             ClearCollections();
-            textBox1.Clear();
+            DisAssemblyView.Clear();
             AssemblyView.Clear();
             byteviewer.SetBytes(new byte[] { });
         }
@@ -368,9 +368,9 @@ namespace BinToAssembly
         private void ConvertToDataDCWClick(object sender, EventArgs e)
         {
             // Get any highlighted text
-            string selectedText = textBox1.SelectedText;
+            string selectedText = DisAssemblyView.SelectedText;
             string[] splitSelectedText = selectedText.Split('\n');
-            if (textBox1.SelectedText != "")
+            if (DisAssemblyView.SelectedText != "")
             {
                 string str = "";
                 foreach (string dataLines in splitSelectedText)
@@ -392,7 +392,7 @@ namespace BinToAssembly
                         str += data + "\r\n";
                     }
                 }
-                textBox1.SelectedText = str.Remove(str.LastIndexOf("\r\n"));
+                DisAssemblyView.SelectedText = str.Remove(str.LastIndexOf("\r\n"));
             }
         }
 
@@ -401,7 +401,7 @@ namespace BinToAssembly
         /// </summary>
         protected void ConvertToDataDCBClick(object sender, EventArgs e)
         {
-            string selectedText = textBox1.SelectedText;
+            string selectedText = DisAssemblyView.SelectedText;
             string[] splitSelectedText = selectedText.Split('\n');
             var startText = splitSelectedText[0].Split(' ');
             int start = Convert.ToInt32(startText[0], 16);
@@ -410,7 +410,7 @@ namespace BinToAssembly
             var converted = Encoding.ASCII.GetString(data, start, end - start);
             string str = startText[0] + "                         DC.B '" + converted + "'";
             var splitLines = SplitToNewLines(str).ToArray();
-            textBox1.SelectedText = string.Join("", splitLines);
+            DisAssemblyView.SelectedText = string.Join("", splitLines);
         }
 
         /// <summary>
@@ -444,7 +444,7 @@ namespace BinToAssembly
         {
             if (keyData == (Keys.Control | Keys.A))
             {
-                var todo = textBox1.Lines.ToList().FindAll(x => x.Contains(";TODO!"));
+                var todo = DisAssemblyView.Lines.ToList().FindAll(x => x.Contains(";TODO!"));
                 string temp = "";
                 foreach (object item in todo) { temp += item.ToString() + "\r\n"; }
                 if (temp != "")
@@ -455,17 +455,20 @@ namespace BinToAssembly
             }
             if (keyData == (Keys.Control | Keys.G))
             {
+                // https://github.com/HCoderTech/Notepad-Using-CSharp-YT/blob/master/Notepad/MainForm.cs
+                // https://stackoverflow.com/questions/739656/how-can-i-scroll-to-a-specified-line-in-a-winforms-textbox-using-c
+
                 // TODO add selection txt box & test for invalid values 
                 int line = 850;
-                string[] lines = textBox1.Lines;
+                string[] lines = DisAssemblyView.Lines;
                 int len = 0;
                 for (int i = 0; i < line - 1; i++)
                 {
                     len = len + lines[i].Length + 1;
                 }
-                textBox1.Focus();
-                textBox1.Select(len, 0);
-                textBox1.ScrollToCaret();
+                DisAssemblyView.Focus();
+                DisAssemblyView.Select(len, 0);
+                DisAssemblyView.ScrollToCaret();
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }

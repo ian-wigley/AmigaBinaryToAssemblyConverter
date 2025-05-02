@@ -31,7 +31,8 @@ namespace BinToAssembly
             leftWindowToolStripMenuItem.Enabled = false;
             rightWindowToolStripMenuItem.Enabled = false;
             bool result = populateOpCodeList.Init();
-            Numbers.Font = AssemblyView.Font;
+            leftNumbers.Font = DisAssemblyView.Font;
+            rightNumbers.Font = AssemblyView.Font;
             CompilerTextBox.Cursor = Cursors.Arrow;
             CompilerTextBox.GotFocus += CompilerTextBox_GotFocus;
             assemblyCreator = new AssemblyCreator();
@@ -40,35 +41,23 @@ namespace BinToAssembly
         /// <summary>
         /// Add Line Numbers
         /// </summary>
-        private void AddLineNumbers()
+        private void AddLineNumbers(RichTextBox view, RichTextBox location)
         {
+            location.Font = view.Font;
             Point pt = new Point(0, 0);
-            int firstIndex = AssemblyView.GetCharIndexFromPosition(pt);
-            int firstLine = AssemblyView.GetLineFromCharIndex(firstIndex);
+            int firstIndex = view.GetCharIndexFromPosition(pt);
+            int firstLine = view.GetLineFromCharIndex(firstIndex);
             pt.X = ClientRectangle.Width;
-            pt.Y = ClientRectangle.Height;
-            int lastIndex = AssemblyView.GetCharIndexFromPosition(pt);
-            int lastLine = AssemblyView.GetLineFromCharIndex(lastIndex);
-            Numbers.SelectionAlignment = HorizontalAlignment.Center;
-            Numbers.Text = "";
-            Numbers.Width = GetWidth();
+            pt.Y = ClientRectangle.Height -1;
+            int lastIndex = view.GetCharIndexFromPosition(pt);
+            int lastLine = view.GetLineFromCharIndex(lastIndex);
+            location.SelectionAlignment = HorizontalAlignment.Center;
+            location.Text = "";
+            location.Width = 30;
             for (int i = firstLine - 1; i <= lastLine + 1; i++)
             {
-                Numbers.Text += i + 1 + "\n";
+                location.Text += i + 1 + "\n";
             }
-        }
-
-        /// <summary>
-        /// Get Width
-        /// </summary>
-        private int GetWidth()
-        {
-            int line = Numbers.Lines.Length;
-            int width;
-            if (line <= 99) { width = 20 + (int)Numbers.Font.Size; }
-            else if (line <= 999) { width = 30 + (int)Numbers.Font.Size; }
-            else { width = 50 + (int)Numbers.Font.Size; }
-            return width;
         }
 
         /// <summary>
@@ -115,6 +104,7 @@ namespace BinToAssembly
                 labelGenerator.Enabled = true;
                 byteviewer.SetFile(openFileDialog.FileName);
                 generateLabelsToolStripMenuItem.Enabled = true;
+                AddLineNumbers(DisAssemblyView, leftNumbers);
             }
         }
 
@@ -265,8 +255,8 @@ namespace BinToAssembly
             {
                 Compile.Enabled = true;
             }
-            Numbers.Select();
-            AddLineNumbers();
+            rightNumbers.Select();
+            AddLineNumbers(DisAssemblyView, rightNumbers);
         }
 
         /// <summary>
@@ -287,7 +277,7 @@ namespace BinToAssembly
             CompilerTextBox.Text = "";
 
             // Get a random temporary file name
-            string tempFile =  Path.GetRandomFileName();
+            string tempFile = Path.GetRandomFileName();
 
             // Convert the lines of Text to a byte array
             byte[] dataAsBytes = AssemblyView.Lines.SelectMany(s => Encoding.UTF8.GetBytes(s + Environment.NewLine)).ToArray();
@@ -302,7 +292,8 @@ namespace BinToAssembly
 
             var sc = populateOpCodeList.GetXMLLoader.SettingsCache;
 
-            if (!Directory.Exists(sc.Folder)) {
+            if (!Directory.Exists(sc.Folder))
+            {
                 Directory.CreateDirectory(sc.Folder);
             }
 
@@ -350,15 +341,23 @@ namespace BinToAssembly
             {
                 // TODO
             }
-         }
+        }
+
+        private void DisAssemblyView_VScroll(object sender, EventArgs e)
+        {
+            rightNumbers.Text = "";
+            AddLineNumbers(DisAssemblyView, leftNumbers);
+            AddLineNumbers(AssemblyView, rightNumbers);
+            DisAssemblyView.Invalidate();
+        }
 
         /// <summary>
         /// Method to
         /// </summary>
-        private void TextBox2_VScroll(object sender, EventArgs e)
+        private void AssemblyView_VScroll(object sender, EventArgs e)
         {
-            Numbers.Text = "";
-            AddLineNumbers();
+            rightNumbers.Text = "";
+            AddLineNumbers(AssemblyView, rightNumbers);
             AssemblyView.Invalidate();
         }
 
@@ -436,6 +435,24 @@ namespace BinToAssembly
             yield return line.ToString().ToString();
         }
 
+
+        //private const int WM_HSCROLL = 0x114;
+        //private const uint WM_VSCROLL = 0x115;
+        //private const int WM_MOUSEWHEEL = 0x20A;
+
+        //protected override void WndProc(ref Message m)
+        //{
+        //    base.WndProc(ref m);
+
+        //    if (m.Msg == WM_VSCROLL || m.Msg == WM_MOUSEWHEEL)
+        //    {
+        //        var sctoll = true;
+        //        sctoll = false;
+        //        // scrolling...
+        //    }
+        //}
+
+
         /// <summary>
         /// Development debug helper method.
         /// Copy all the lines containing the text `;TODO!` to the clipboard
@@ -455,8 +472,8 @@ namespace BinToAssembly
             }
             if (keyData == (Keys.Control | Keys.G))
             {
-                // https://github.com/HCoderTech/Notepad-Using-CSharp-YT/blob/master/Notepad/MainForm.cs
-                // https://stackoverflow.com/questions/739656/how-can-i-scroll-to-a-specified-line-in-a-winforms-textbox-using-c
+                //// https://github.com/HCoderTech/Notepad-Using-CSharp-YT/blob/master/Notepad/MainForm.cs
+                //// https://stackoverflow.com/questions/739656/how-can-i-scroll-to-a-specified-line-in-a-winforms-textbox-using-c
 
                 // TODO add selection txt box & test for invalid values 
                 int line = 850;
@@ -472,5 +489,6 @@ namespace BinToAssembly
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
     }
 }

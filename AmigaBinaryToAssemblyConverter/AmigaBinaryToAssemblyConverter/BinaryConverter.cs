@@ -404,7 +404,7 @@ namespace BinToAssembly
             string[] splitSelectedText = selectedText.Split('\n');
             var startText = splitSelectedText[0].Split(' ');
             int start = Convert.ToInt32(startText[0], 16);
-            var endText = splitSelectedText[splitSelectedText.Length - 1].Split(' ');
+            var endText = splitSelectedText[splitSelectedText.Length - 2].Split(' ');
             int end = Convert.ToInt32(endText[0], 16);
             var converted = Encoding.ASCII.GetString(data, start, end - start);
             string str = startText[0] + "                         DC.B '" + converted + "'";
@@ -434,24 +434,6 @@ namespace BinToAssembly
             }
             yield return line.ToString().ToString();
         }
-
-
-        //private const int WM_HSCROLL = 0x114;
-        //private const uint WM_VSCROLL = 0x115;
-        //private const int WM_MOUSEWHEEL = 0x20A;
-
-        //protected override void WndProc(ref Message m)
-        //{
-        //    base.WndProc(ref m);
-
-        //    if (m.Msg == WM_VSCROLL || m.Msg == WM_MOUSEWHEEL)
-        //    {
-        //        var sctoll = true;
-        //        sctoll = false;
-        //        // scrolling...
-        //    }
-        //}
-
 
         /// <summary>
         /// Development debug helper method.

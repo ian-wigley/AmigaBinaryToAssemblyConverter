@@ -34,7 +34,7 @@ namespace BinToAssembly
         public void ParseFileContent(
             byte[] data,
             PopulateOpCodeList populateOpCodeList,
-            TextBox textBox,
+            RichTextBox textBox,
             ref List<string> lineNumbers,
             ref List<string> code
             )

@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Text;
+using System.Globalization;
 
 namespace BinToAssembly
 {
@@ -48,7 +49,7 @@ namespace BinToAssembly
             int firstIndex = view.GetCharIndexFromPosition(pt);
             int firstLine = view.GetLineFromCharIndex(firstIndex);
             pt.X = ClientRectangle.Width;
-            pt.Y = ClientRectangle.Height -1;
+            pt.Y = ClientRectangle.Height - 1;
             int lastIndex = view.GetCharIndexFromPosition(pt);
             int lastLine = view.GetLineFromCharIndex(lastIndex);
             location.SelectionAlignment = HorizontalAlignment.Center;
@@ -400,17 +401,66 @@ namespace BinToAssembly
         /// </summary>
         protected void ConvertToDataDCBClick(object sender, EventArgs e)
         {
-            string selectedText = DisAssemblyView.SelectedText;
+            CheckStartOfTheSelectionText();
+            string selectedText = CheckEndOfTheSelectionText();
             string[] splitSelectedText = selectedText.Split('\n');
             var startText = splitSelectedText[0].Split(' ');
             int start = Convert.ToInt32(startText[0], 16);
-            var endText = splitSelectedText[splitSelectedText.Length - 2].Split(' ');
+            var endText = splitSelectedText[splitSelectedText.Length - 1].Split(' ');
             int end = Convert.ToInt32(endText[0], 16);
             var converted = Encoding.ASCII.GetString(data, start, end - start);
             string str = startText[0] + "                         DC.B '" + converted + "'";
             var splitLines = SplitToNewLines(str).ToArray();
             DisAssemblyView.SelectedText = string.Join("", splitLines);
         }
+
+        /// <summary>
+        /// Method to check the selection text is valid
+        /// </summary>
+        public string CheckStartOfTheSelectionText()
+        {
+            string selectedText = DisAssemblyView.SelectedText;
+            string[] splitSelectedText = selectedText.Split('\n');
+            var startText = splitSelectedText[0].Split(' ');
+            if (!uint.TryParse(startText[0], NumberStyles.HexNumber, null, out uint parseResult))
+            {
+                // Try the next line
+                startText = splitSelectedText[1].Split(' ');
+                if (uint.TryParse(startText[0], NumberStyles.HexNumber, null, out parseResult))
+                {
+                    List<string> textBoxLines = DisAssemblyView.Lines.ToList();
+                    // Find the index to the full line in the DisAssemblyView.Lines
+                    int index = Enumerable.Range(0, textBoxLines.Count).FirstOrDefault(i => textBoxLines[i].StartsWith(startText[0])) - 1;
+                    splitSelectedText[index] = textBoxLines[index];
+                    DisAssemblyView.Select(index, splitSelectedText.Length);
+                }
+            }
+            return "TODO !";
+        }
+
+
+        /// <summary>
+        /// Method to check the selection text is valid
+        /// </summary>
+        public string CheckEndOfTheSelectionText()
+        {
+            string selectedText = DisAssemblyView.SelectedText;
+            int lastNewLineFound = selectedText.LastIndexOf("\n") + 1;
+            if (lastNewLineFound != selectedText.Length)
+            {
+                // The whole line has not been highlighted
+                string shortLine = selectedText.Substring(lastNewLineFound, selectedText.Length - lastNewLineFound);
+                List<string> textBoxLines = DisAssemblyView.Lines.ToList();
+                // Find the index to the full line in the DisAssemblyView.Lines
+                int index = Enumerable.Range(0, textBoxLines.Count).FirstOrDefault(i => textBoxLines[i].StartsWith(shortLine));
+                string removedShortLine = selectedText.Remove(lastNewLineFound, selectedText.Length - lastNewLineFound);
+                selectedText = removedShortLine + textBoxLines[index];
+                // Finally update the selection
+                DisAssemblyView.SelectionLength += (textBoxLines[index].Length - shortLine.Length);
+            }
+            return selectedText;
+        }
+
 
         /// <summary>
         /// Split To New Lines

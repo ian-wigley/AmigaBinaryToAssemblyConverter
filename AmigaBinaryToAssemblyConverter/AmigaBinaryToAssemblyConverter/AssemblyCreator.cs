@@ -32,13 +32,12 @@ namespace BinToAssembly
             string start,
             string end)
         {
-            bool firstPass = true;
-            string dataWord = "";
             int count = 0;
             int labelCount = 0;
-
             int userSelectedFileEnd = int.Parse(end, System.Globalization.NumberStyles.HexNumber);
             int originalFileLength = Code.Length;
+            bool firstPass = true;
+            string dataWord = "";
 
             // First pass parses the content looking for branch & jump conditions
             while (firstPass)

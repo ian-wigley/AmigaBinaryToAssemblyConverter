@@ -70,8 +70,8 @@ namespace BinToAssembly
         {
             AssemblyView.Clear();
             ClearRightWindow();
-            assemblyCreator.Code = DisAssemblyView.Lines;
             AssemblyView.Font = new Font(FontFamily.GenericMonospace, AssemblyView.Font.Size);
+            assemblyCreator.Code = DisAssemblyView.Lines;
             assemblyCreator.InitialPass(start, end);
             assemblyCreator.SecondPass();
             AssemblyView.Lines = assemblyCreator.FinalPass();
@@ -380,16 +380,16 @@ namespace BinToAssembly
                     {
                         string trimmed = dataLines.Substring(0, index);
                         string[] extraSplit = trimmed.Split(' ');
-                        string data = "";
+                        string localData = "";
                         str += extraSplit[0] + "                         DC.W ";
 
                         for (int i = 1; i < extraSplit.Length; i++)
                         {
-                            data += "$" + extraSplit[i] + ",";
+                            localData += "$" + extraSplit[i] + ",";
 
                         }
-                        data = data.Remove(data.LastIndexOf(","));
-                        str += data + "\r\n";
+                        localData = localData.Remove(localData.LastIndexOf(","));
+                        str += localData + "\r\n";
                     }
                 }
                 DisAssemblyView.SelectedText = str.Remove(str.LastIndexOf("\r\n"));
@@ -406,7 +406,7 @@ namespace BinToAssembly
             string[] splitSelectedText = selectedText.Split('\n');
             var startText = splitSelectedText[0].Split(' ');
             int start = Convert.ToInt32(startText[0], 16);
-            var endText = splitSelectedText[splitSelectedText.Length - 1].Split(' ');
+            var endText = splitSelectedText[splitSelectedText.Length - 2].Split(' '); // -1
             int end = Convert.ToInt32(endText[0], 16);
             var converted = Encoding.ASCII.GetString(data, start, end - start);
             string str = startText[0] + "                         DC.B '" + converted + "'";
